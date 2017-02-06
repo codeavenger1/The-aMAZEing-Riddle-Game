@@ -1,14 +1,10 @@
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class mazeRiddleMAIN {
 	JFrame frame;
-	JPanel panel;
+	MazeRiddlePANEL panel;
 	static int height = 1000;
 	static int width = 633;
 	BufferedImage test1;
@@ -16,21 +12,23 @@ public class mazeRiddleMAIN {
 	public mazeRiddleMAIN() {
 		// TODO Auto-generated constructor stub
 		this.frame = new JFrame();
-		this.panel = new JPanel();
+		this.panel = new MazeRiddlePANEL();
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		mazeRiddleMAIN main = new mazeRiddleMAIN();
-		test1easyMAZE maze = new test1easyMAZE(0, 0 , width, height);
-		 
+		// test1easyMAZE maze = new test1easyMAZE(0, 0 , width, height);
+		main.setup();
 	}
 
 	void setup() {
 		frame.setVisible(true);
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		frame.add(panel);
+		frame.addKeyListener(panel);
+		panel.startGame();
 	}
 
 }
