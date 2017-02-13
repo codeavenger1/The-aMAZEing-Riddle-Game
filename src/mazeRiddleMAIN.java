@@ -5,8 +5,8 @@ import javax.swing.JFrame;
 public class mazeRiddleMAIN {
 	JFrame frame;
 	MazeRiddlePANEL panel;
-	static int height = 1000;
-	static int width = 633;
+	static int height = 633;
+	static int width = 1000;
 	BufferedImage test1;
 
 	public mazeRiddleMAIN() {
@@ -28,6 +28,7 @@ public class mazeRiddleMAIN {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(panel);
 		frame.addKeyListener(panel);
+		frame.addMouseListener(panel);
 		panel.startGame();
 	}
 
