@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,13 +20,50 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public static BufferedImage LineImg;
 	public static int MAZESTARTx = 417;
 	public static int MAZESTARTy = 17;
-	public static int Line1x =  406;
+	public static int Line1x = 406;
 	public static int Line1y = 20;
-	public static int Line2x =  407;
+	public static int Line2x = 407;
 	public static int Line2y = 67;
+	public static int Line3x = 231;
+	public static int Line3y = 75;
+	public static int Line4x = 110;
+	public static int Line4y = 137;
+	public static int Line5x = 406;
+	public static int Line5y = 198;
+	public static int Line6x = 405;
+	public static int Line6y = 316;
+	public static int Line7x = 885;
+	public static int Line7y = 136;
+	public static int Line8x = 590;
+	public static int Line8y = 250;
+	public static int Line9x = 829;
+	public static int Line9y = 365;
+	public static int Line10x = 710;
+	public static int Line10y = 490;
+	public static int Line11x = 710;
+	public static int Line11y = 490;
+	public static int Line12x = 530;
+	public static int Line12y = 370;
+	public static int Line13x = 295;
+	public static int Line13y = 370;
+	public static int Line14x = 288;
+	public static int Line14y = 198;
+
 	MazeRiddleDINO dino = new MazeRiddleDINO(MAZESTARTx, MAZESTARTy, 50, 50);
 	RedLines line = new RedLines(Line1x, Line1y, 55, 8);
 	RedLines line2 = new RedLines(Line2x, Line2y, 8, 55);
+	RedLines line3 = new RedLines(Line3x, Line3y, 8, 55);
+	RedLines line4 = new RedLines(Line4x, Line4y, 55, 8);
+	RedLines line5 = new RedLines(Line5x, Line5y, 55, 8);
+	RedLines line6 = new RedLines(Line6x, Line6y, 55, 8);
+	RedLines line7 = new RedLines(Line7x, Line7y, 55, 8);
+	RedLines line8 = new RedLines(Line8x, Line8y, 8, 55);
+	RedLines line9 = new RedLines(Line9x, Line9y, 8, 55);
+	RedLines line10 = new RedLines(Line10x, Line10y, 8, 55);
+	RedLines line11 = new RedLines(Line11x, Line11y, 55, 8);
+	RedLines line12 = new RedLines(Line12x, Line12y, 8, 55);
+	RedLines line13 = new RedLines(Line13x, Line13y, 8, 55);
+	RedLines line14 = new RedLines(Line14x, Line14y, 55, 8);
 
 	public MazeRiddlePANEL() {
 		// TODO Auto-generated constructor stub
@@ -52,6 +90,19 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		g.drawImage(dinoImg, dino.x, dino.y, dino.height, dino.width, null);
 		g.drawImage(LineImg, line.x, line.y, line.height, line.width, null);
 		g.drawImage(LineImg, line2.x, line2.y, line2.height, line2.width, null);
+		g.drawImage(LineImg, line3.x, line3.y, line3.height, line3.width, null);
+		g.drawImage(LineImg, line4.x, line4.y, line4.height, line4.width, null);
+		g.drawImage(LineImg, line5.x, line5.y, line5.height, line5.width, null);
+		g.drawImage(LineImg, line6.x, line6.y, line6.height, line6.width, null);
+		g.drawImage(LineImg, line7.x, line7.y, line7.height, line7.width, null);
+		g.drawImage(LineImg, line8.x, line8.y, line8.height, line8.width, null);
+		g.drawImage(LineImg, line9.x, line9.y, line9.height, line9.width, null);
+		g.drawImage(LineImg, line10.x, line10.y, line10.height, line10.width, null);
+		g.drawImage(LineImg, line11.x, line11.y, line11.height, line11.width, null);
+		g.drawImage(LineImg, line12.x, line12.y, line12.height, line12.width, null);
+		g.drawImage(LineImg, line13.x, line13.y, line13.height, line13.width, null);
+		g.drawImage(LineImg, line14.x, line14.y, line14.height, line14.width, null);
+
 	}
 
 	void startGame() {
@@ -82,6 +133,17 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		}
 	}
 
+	public boolean canMoveTo(int x, int y) {
+		int mazeColor = maze1Img.getRGB(x, y);
+
+		if (mazeColor != Color.white.getRGB()) {
+			return false;
+		} else {
+			return true;
+		}
+
+	}
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -91,30 +153,30 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("x is " + e.getX() + "y is " + e.getY());
+		System.out.println("x is " + e.getX() + " y is " + e.getY());
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
