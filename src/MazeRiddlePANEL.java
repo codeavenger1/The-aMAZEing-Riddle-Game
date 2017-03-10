@@ -102,7 +102,8 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		g.drawImage(LineImg, line12.x, line12.y, line12.height, line12.width, null);
 		g.drawImage(LineImg, line13.x, line13.y, line13.height, line13.width, null);
 		g.drawImage(LineImg, line14.x, line14.y, line14.height, line14.width, null);
-
+	canMoveTo(dino.x, dino.y);
+	g.fillRect(dino.x, dino.y, 1, 1);
 	}
 
 	void startGame() {
@@ -133,15 +134,20 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		}
 	}
 
-	public boolean canMoveTo(int x, int y) {
+	public void canMoveTo(int x, int y) {
 		int mazeColor = maze1Img.getRGB(x, y);
 
 		if (mazeColor != Color.white.getRGB()) {
-			return false;
-		} else {
-			return true;
-		}
+			System.out.println("collided");
+		
+		} 
 
+		else {
+			dino.x = 417;
+			dino.y = 17;
+		}
+		
+		
 	}
 
 	@Override
