@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -102,8 +103,8 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		g.drawImage(LineImg, line12.x, line12.y, line12.height, line12.width, null);
 		g.drawImage(LineImg, line13.x, line13.y, line13.height, line13.width, null);
 		g.drawImage(LineImg, line14.x, line14.y, line14.height, line14.width, null);
-	canMoveTo(dino.x, dino.y);
-	g.fillRect(dino.x, dino.y, 1, 1);
+	canMoveTo(dino.x+(dino.width/2), dino.y);
+	g.fillRect(dino.x+(dino.width/2), dino.y, 1, 1);
 	}
 
 	void startGame() {
@@ -136,20 +137,39 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 
 	public void canMoveTo(int x, int y) {
 		int mazeColor = maze1Img.getRGB(x, y);
-
-		if (mazeColor != Color.white.getRGB()) {
-			System.out.println("collided");
 		
-		} 
-
-		else {
+		
+		if (mazeColor < -400000){
+			tellRiddle();
+		}
+		
+		else if (mazeColor < -400000) {
 			dino.x = 417;
 			dino.y = 17;
-		}
+		
+			System.out.println(mazeColor);
+						System.out.println("collided");
+		
+		} 
 		
 		
 	}
+public void tellRiddle(){
+	timer.stop();
+			
+			if (dino.x > line.x - line.height && dino.x < line.x + line.width && dino.y > line.y && dino.y < line.y + line.height ) {
+			System.out.println("line.x"+ line.x);
+			System.out.println("line.x + line.width"+ (line.x + line.width));
+			System.out.println("dino.x"+ dino.x);
+		
+				String riddle1 = JOptionPane.showInputDialog("riddle");
+				dino.x = 417;
+				dino.y = 17;
+			}
+			timer.start();
+}
 
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
