@@ -16,6 +16,7 @@ import javax.swing.Timer;
 
 public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListener, MouseListener {
 	Timer timer;
+	boolean test = false;
 	public static BufferedImage maze1Img;
 	public static BufferedImage dinoImg;
 	public static BufferedImage LineImg;
@@ -89,20 +90,22 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public void paintComponent(Graphics g) {
 		g.drawImage(maze1Img, 0, 0, 1000, 633, null);
 		g.drawImage(dinoImg, dino.x, dino.y, dino.width, dino.height, null);
-		g.drawImage(LineImg, line.x, line.y, line.width, line.height, null);
-		g.drawImage(LineImg, line2.x, line2.y, line2.width, line2.height, null);
-		g.drawImage(LineImg, line3.x, line3.y, line3.width, line3.height, null);
-		g.drawImage(LineImg, line4.x, line4.y, line4.width, line4.height, null);
-		g.drawImage(LineImg, line5.x, line5.y, line5.width, line5.height, null);
-		g.drawImage(LineImg, line6.x, line6.y, line6.width, line6.height, null);
-		g.drawImage(LineImg, line7.x, line7.y, line7.width, line7.height, null);
-		g.drawImage(LineImg, line8.x, line8.y, line8.width, line8.height, null);
-		g.drawImage(LineImg, line9.x, line9.y, line9.width, line9.height, null);
-		g.drawImage(LineImg, line10.x, line10.y, line10.width, line10.height, null);
-		g.drawImage(LineImg, line11.x, line11.y, line11.width, line11.height, null);
-		g.drawImage(LineImg, line12.x, line12.y, line12.width, line12.height, null);
-		g.drawImage(LineImg, line13.x, line13.y, line13.width, line13.height, null);
-		g.drawImage(LineImg, line14.x, line14.y, line14.width, line14.height, null);
+		line.draw(g,LineImg);
+		line2.draw(g,LineImg);
+		line3.draw(g,LineImg);
+		line4.draw(g,LineImg);
+		line5.draw(g,LineImg);
+		line6.draw(g,LineImg);
+		line7.draw(g,LineImg);
+		line8.draw(g,LineImg);
+		line9.draw(g,LineImg);
+		line10.draw(g,LineImg);
+		line11.draw(g,LineImg);
+		line12.draw(g,LineImg);
+		line13.draw(g,LineImg);
+		line14.draw(g,LineImg);
+		
+		
 		canMoveTo(dino.x + (dino.width / 2), dino.y); // top middle dot
 		canMoveTo(dino.x, dino.y + (dino.height / 2)); // left middle dot
 		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height)); // bottom middle dot
@@ -154,8 +157,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 			dino.y = 17;
 			System.out.println(mazeColor);
 			System.out.println("collided");
-			
-			
+			line.setVisible(true);
 		}
 		
 	}
@@ -163,32 +165,61 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public void tellRiddle() {
 		timer.stop();
 
-		if (dino.x > line.x - line.height && dino.x < line.x + line.width && dino.y > line.y && dino.y < line.y + line.height) {
+		if (dino.x > line.x - line.height && dino.x < line.x + line.width && dino.y > line.y && dino.y < line.y + line.height && line.visible) {
 			System.out.println("line.x" + line.x);
 			System.out.println("line.x + line.width" + (line.x + line.width));
 			System.out.println("dino.x" + dino.x);
 
-			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \n What gets shorter, the older it becomes?");
-			if (riddle1.equals("Pencil")) {
+			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets shorter, the older it becomes?");
+			if (riddle1.equalsIgnoreCase("pencil")){
+				line.setVisible(false);
+				JOptionPane.showMessageDialog(null, "You are correct!");
+				dino.x = Line1x - 17;
+				dino.y = Line1y + 2;
+			} else if (riddle1.equalsIgnoreCase("candle")) {
 				line.x = -17;
 				JOptionPane.showMessageDialog(null, "You are correct!");
+				dino.x = Line1x - 17;
+				dino.y = Line1y + 2;
+			}
+			else if (riddle1.equalsIgnoreCase("a pencil")) {
+				line.x = -17;
+				JOptionPane.showMessageDialog(null, "You are correct!");
+				dino.x = Line1x - 17;
+				dino.y = Line1y+2;
+			}
+			else if (riddle1.equalsIgnoreCase("a candle")) {
+				line.x = -17;
+				JOptionPane.showMessageDialog(null, "You are correct!");
+				dino.x = Line1x - 17;
+				dino.y = Line1y+2;
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
 				dino.x = 417;
 				dino.y = 17;
-			} else {
-				JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!!");
-				dino.x = 417;
-				dino.y = 17;
+				Line1x = 406;
+				Line1y = 20;
 			}
 
 		}
-		if (dino.x > line2.x - line2.height && dino.x < line2.x + line2.width && dino.y > line2.y && dino.y < line2.y + line2.height) {
+		if (dino.x > line2.x - line2.height && dino.x < line2.x + line2.width && dino.y > line2.y && dino.y < line2.y + line2.height && line2.visible) {
 
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			if (riddle1.equals("hello")) {
-				line2.x = 0;
-				JOptionPane.showMessageDialog(null, "You are correct!");
-			} else {
-				JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!!");
+			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets wetter the more it dries?");
+			if (riddle1.equalsIgnoreCase("towel")) {
+				line2.x = -55;
+				JOptionPane.showMessageDialog(null, "Correct! Great job!");
+				dino.x = Line2x + 10;
+				dino.y = Line2y + 17;
+			}
+			else if (riddle1.equalsIgnoreCase("a towel")) {
+				line2.x = -55;
+				JOptionPane.showMessageDialog(null, "Correct! Great job!");
+				dino.x = Line2x + 10;
+				dino.y = Line2y + 17;
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Nice try, but....YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
 				dino.x = 417;
 				dino.y = 17;
 			}
