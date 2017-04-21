@@ -106,14 +106,14 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		line14.draw(g,LineImg);
 		
 		
-		canMoveTo(dino.x + (dino.width / 2), dino.y); // top middle dot
+		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // top middle dot
 		canMoveTo(dino.x, dino.y + (dino.height / 2)); // left middle dot
 		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height)); // bottom middle dot
 		canMoveTo(dino.x + (dino.width-10), dino.y + (dino.height / 2)); // right middle dot
 
-		g.fillRect(dino.x + (dino.width / 2), dino.y, 1, 1); // top middle dot
-		g.fillRect(dino.x, dino.y + (dino.height / 2), 1, 1); // left middle dot
-		g.fillRect(dino.x + (dino.width / 2), dino.y + (dino.height), 1, 1); // bottom middle dot
+		g.fillRect(dino.x + (dino.width / 2 ), dino.y +(dino.height -3), 1, 1); // top middle dot
+		g.fillRect(dino.x, dino.y + (dino.height / 2 ), 1, 1); // left middle dot
+		g.fillRect(dino.x + (dino.width / 2), dino.y + (dino.height-2), 1, 1); // bottom middle dot
 		g.fillRect(dino.x + (dino.width-10), dino.y + (dino.height / 2), 1, 1); // right middle dot
 	}
 
@@ -147,17 +147,35 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 
 	public void canMoveTo(int x, int y) {
 		int mazeColor = maze1Img.getRGB(x, y);
-
+	
+			
 		if (mazeColor < -400000) {
+		if (mazeColor < (x = 410) && (y == 44)) {
+			
+		}
 			tellRiddle();
 		}
-
+//411,49
 		if (mazeColor < -16000000) {
 			dino.x = 417;
 			dino.y = 17;
 			System.out.println(mazeColor);
 			System.out.println("collided");
+
 			line.setVisible(true);
+			line2.setVisible(true);
+			line3.setVisible(true);
+			line4.setVisible(true);
+			line5.setVisible(true);
+			line6.setVisible(true);
+			line7.setVisible(true);
+			line8.setVisible(true);
+			line9.setVisible(true);
+			line10.setVisible(true);
+			line11.setVisible(true);
+			line12.setVisible(true);
+			line13.setVisible(true);
+		
 		}
 		
 	}
@@ -169,27 +187,30 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 			System.out.println("line.x" + line.x);
 			System.out.println("line.x + line.width" + (line.x + line.width));
 			System.out.println("dino.x" + dino.x);
+System.out.println("red line 1");
 
 			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets shorter, the older it becomes?");
+			
 			if (riddle1.equalsIgnoreCase("pencil")){
 				line.setVisible(false);
 				JOptionPane.showMessageDialog(null, "You are correct!");
 				dino.x = Line1x - 17;
 				dino.y = Line1y + 2;
 			} else if (riddle1.equalsIgnoreCase("candle")) {
-				line.x = -17;
+				line.setVisible(false);
 				JOptionPane.showMessageDialog(null, "You are correct!");
 				dino.x = Line1x - 17;
 				dino.y = Line1y + 2;
+				
 			}
 			else if (riddle1.equalsIgnoreCase("a pencil")) {
-				line.x = -17;
+				line.setVisible(false);
 				JOptionPane.showMessageDialog(null, "You are correct!");
 				dino.x = Line1x - 17;
 				dino.y = Line1y+2;
 			}
 			else if (riddle1.equalsIgnoreCase("a candle")) {
-				line.x = -17;
+				line.setVisible(false);
 				JOptionPane.showMessageDialog(null, "You are correct!");
 				dino.x = Line1x - 17;
 				dino.y = Line1y+2;
@@ -198,8 +219,8 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 				JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
 				dino.x = 417;
 				dino.y = 17;
-				Line1x = 406;
-				Line1y = 20;
+				line.x = 406;
+				line.y = 20;
 			}
 
 		}
@@ -207,13 +228,13 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 
 			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets wetter the more it dries?");
 			if (riddle1.equalsIgnoreCase("towel")) {
-				line2.x = -55;
+				line2.setVisible(false);
 				JOptionPane.showMessageDialog(null, "Correct! Great job!");
 				dino.x = Line2x + 10;
 				dino.y = Line2y + 17;
 			}
 			else if (riddle1.equalsIgnoreCase("a towel")) {
-				line2.x = -55;
+				line2.setVisible(false);
 				JOptionPane.showMessageDialog(null, "Correct! Great job!");
 				dino.x = Line2x + 10;
 				dino.y = Line2y + 17;
@@ -222,14 +243,34 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 				JOptionPane.showMessageDialog(null, "Nice try, but....YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
 				dino.x = 417;
 				dino.y = 17;
+				line2.x = 407;
+				line2.y = 67;
 			}
 
 		}
 		if (dino.x > line3.x - line3.height && dino.x < line3.x + line3.width && dino.y > line3.y && dino.y < line3.y + line3.height) {
-
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
+			
+			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat has a face and two hands, but no arms or legs?");
+			if (riddle1.equalsIgnoreCase("a clock")) {
+				line3.setVisible(false);
+				JOptionPane.showMessageDialog(null, "Yay! Nice job!");
+				dino.x = Line3x;
+				dino.y = Line3y+5;
+			}
+			else if (riddle1.equalsIgnoreCase("clock")) {
+				line3.setVisible(false);
+				JOptionPane.showMessageDialog(null, "Yay! Nice job!");
+				dino.x = Line3x;
+				dino.y = Line3y+5;
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "WRONG!!  \nStart again and answer this riddle to pass this line.");
+				dino.x = 417;
+				dino.y = 17;
+				line3.x = 231;
+				line3.y = 75;
+			}
+		
 		}
 		if (dino.x > line4.x - line4.height && dino.x < line4.x + line4.width && dino.y > line4.y && dino.y < line4.y + line4.height) {
 
