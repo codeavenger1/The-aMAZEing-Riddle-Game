@@ -106,15 +106,16 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		line14.draw(g,LineImg);
 		
 		
-		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // top middle dot
+		canMoveTo(dino.x + (dino.width / 2), dino.y); // top middle dot
 		canMoveTo(dino.x, dino.y + (dino.height / 2)); // left middle dot
 		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height)); // bottom middle dot
 		canMoveTo(dino.x + (dino.width-10), dino.y + (dino.height / 2)); // right middle dot
 
-		g.fillRect(dino.x + (dino.width / 2 ), dino.y +(dino.height -3), 1, 1); // top middle dot
-		g.fillRect(dino.x, dino.y + (dino.height / 2 ), 1, 1); // left middle dot
-		g.fillRect(dino.x + (dino.width / 2), dino.y + (dino.height-2), 1, 1); // bottom middle dot
-		g.fillRect(dino.x + (dino.width-10), dino.y + (dino.height / 2), 1, 1); // right middle dot
+		g.setColor(Color.BLUE);
+		g.fillRect(dino.x + (dino.width / 2 ), dino.y, 2, 2); // top middle dot
+		g.fillRect(dino.x, dino.y + (dino.height / 2 ), 2, 2); // left middle dot
+		g.fillRect(dino.x + (dino.width / 2), dino.y + (dino.height-2), 2, 2); // bottom middle dot
+		g.fillRect(dino.x + (dino.width-10), dino.y + (dino.height / 2), 2, 2); // right middle dot
 	}
 
 	void startGame() {
@@ -131,16 +132,12 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			System.out.println("RightKeyPressed");
 			dino.moveRight();
 		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			System.out.println("LeftKeyPressed");
 			dino.moveLeft();
 		} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			System.out.println("DownKeyPressed");
 			dino.moveDown();
 		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			System.out.println("UpKeyPressed");
 			dino.moveUp();
 		}
 	}
@@ -150,13 +147,11 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	
 			
 		if (mazeColor < -400000) {
-		if (mazeColor < (x = 410) && (y == 44)) {
-			
+			System.out.println("riddle");
+			tellRiddle(x, y);
 		}
-			tellRiddle();
-		}
-//411,49
-		if (mazeColor < -16000000) {
+
+		if (mazeColor <= -16000000) {
 			dino.x = 417;
 			dino.y = 17;
 			System.out.println(mazeColor);
@@ -180,10 +175,10 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		
 	}
 
-	public void tellRiddle() {
+	public void tellRiddle(int x, int y) {
 		timer.stop();
 
-		if (dino.x > line.x - line.height && dino.x < line.x + line.width && dino.y > line.y && dino.y < line.y + line.height && line.visible) {
+		if (x > line.x - line.height && x < line.x + line.width && y > line.y && y < line.y + line.height && line.visible) {
 			System.out.println("line.x" + line.x);
 			System.out.println("line.x + line.width" + (line.x + line.width));
 			System.out.println("dino.x" + dino.x);
@@ -224,7 +219,7 @@ System.out.println("red line 1");
 			}
 
 		}
-		if (dino.x > line2.x - line2.height && dino.x < line2.x + line2.width && dino.y > line2.y && dino.y < line2.y + line2.height && line2.visible) {
+		if (x > line2.x - line2.height && x < line2.x + line2.width && y > line2.y && y < line2.y + line2.height && line2.visible) {
 
 			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets wetter the more it dries?");
 			if (riddle1.equalsIgnoreCase("towel")) {
@@ -248,7 +243,7 @@ System.out.println("red line 1");
 			}
 
 		}
-		if (dino.x > line3.x - line3.height && dino.x < line3.x + line3.width && dino.y > line3.y && dino.y < line3.y + line3.height) {
+		if (x > line3.x - line3.height && x < line3.x + line3.width && y > line3.y && y < line3.y + line3.height) {
 			
 			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat has a face and two hands, but no arms or legs?");
 			if (riddle1.equalsIgnoreCase("a clock")) {
@@ -261,7 +256,7 @@ System.out.println("red line 1");
 				line3.setVisible(false);
 				JOptionPane.showMessageDialog(null, "Yay! Nice job!");
 				dino.x = Line3x;
-				dino.y = Line3y+5;
+				dino.y = Line3y;
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "WRONG!!  \nStart again and answer this riddle to pass this line.");
@@ -272,69 +267,69 @@ System.out.println("red line 1");
 			}
 		
 		}
-		if (dino.x > line4.x - line4.height && dino.x < line4.x + line4.width && dino.y > line4.y && dino.y < line4.y + line4.height) {
+		if (x > line4.x - line4.height && x < line4.x + line4.width && y > line4.y && y < line4.y + line4.height) {
 
 			String riddle1 = JOptionPane.showInputDialog("riddle");
 			dino.x = 417;
 			dino.y = 17;
 		}
-		if (dino.x > line5.x - line5.height && dino.x < line5.x + line5.width && dino.y > line5.y && dino.y < line5.y + line5.height) {
+		if (x > line5.x - line5.height && x < line5.x + line5.width && y > line5.y && y < line5.y + line5.height) {
 
 			String riddle1 = JOptionPane.showInputDialog("riddle");
 			dino.x = 417;
 			dino.y = 17;
 		}
-		if (dino.x > line6.x - line6.height && dino.x < line6.x + line6.width && dino.y > line6.y && dino.y < line6.y + line6.height) {
+		if (x > line6.x - line6.height && x < line6.x + line6.width && y > line6.y && y < line6.y + line6.height) {
 
 			String riddle1 = JOptionPane.showInputDialog("riddle");
 			dino.x = 417;
 			dino.y = 17;
 		}
-		if (dino.x > line7.x - line7.height && dino.x < line7.x + line7.width && dino.y > line7.y && dino.y < line7.y + line7.height) {
+		if (x > line7.x - line7.height && x < line7.x + line7.width && y > line7.y && y < line7.y + line7.height) {
 
 			String riddle1 = JOptionPane.showInputDialog("riddle");
 			dino.x = 417;
 			dino.y = 17;
 		}
-		if (dino.x > line8.x - line8.height && dino.x < line8.x + line8.width && dino.y > line8.y && dino.y < line8.y + line8.height) {
+		if (x > line8.x - line8.height && x < line8.x + line8.width && y > line8.y && y < line8.y + line8.height) {
 
 			String riddle1 = JOptionPane.showInputDialog("riddle");
 			dino.x = 417;
 			dino.y = 17;
 		}
-		if (dino.x > line9.x - line9.height && dino.x < line9.x + line9.width && dino.y > line9.y && dino.y < line9.y + line9.height) {
+		if (x > line9.x - line9.height && x < line9.x + line9.width && y > line9.y && y < line9.y + line9.height) {
 
 			String riddle1 = JOptionPane.showInputDialog("riddle");
 			dino.x = 417;
 			dino.y = 17;
 		}
-		if (dino.x > line10.x - line10.height && dino.x < line10.x + line10.width && dino.y > line10.y && dino.y < line10.y + line10.height) {
+		if (x > line10.x - line10.height && x < line10.x + line10.width && y > line10.y && y < line10.y + line10.height) {
 
 			String riddle1 = JOptionPane.showInputDialog("riddle");
 			dino.x = 417;
 			dino.y = 17;
 		}
-		if (dino.x > line11.x - line11.height && dino.x < line11.x + line11.width && dino.y > line11.y && dino.y < line11.y + line11.height) {
+		if (x > line11.x - line11.height && x < line11.x + line11.width && y > line11.y && y < line11.y + line11.height) {
 
 			String riddle1 = JOptionPane.showInputDialog("riddle");
 			dino.x = 417;
 			dino.y = 17;
 		}
-		if (dino.x > line12.x - line12.height && dino.x < line12.x + line12.width && dino.y > line12.y && dino.y < line12.y + line12.height) {
-
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
-		}
-
-		if (dino.x > line13.x - line13.height && dino.x < line13.x + line13.width && dino.y > line13.y && dino.y < line13.y + line13.height) {
+		if (x > line12.x - line12.height && x < line12.x + line12.width && y > line12.y && y < line12.y + line12.height) {
 
 			String riddle1 = JOptionPane.showInputDialog("riddle");
 			dino.x = 417;
 			dino.y = 17;
 		}
 
-		if (dino.x > line14.x - line14.height && dino.x < line14.x + line14.width && dino.y > line14.y && dino.y < line14.y + line14.height) {
+		if (x > line13.x - line13.height && x < line13.x + line13.width && y > line13.y && y < line13.y + line13.height) {
+
+			String riddle1 = JOptionPane.showInputDialog("riddle");
+			dino.x = 417;
+			dino.y = 17;
+		}
+
+		if (x > line14.x - line14.height && x < line14.x + line14.width && y > line14.y && y < line14.y + line14.height) {
 
 			String riddle14 = JOptionPane.showInputDialog(
 					"A man lives on the 10th floor of an apartment building.\n Every morning he takes the elevator all the way down to the bottom and goes to work.\n In the evening, when he comes back from work, he gets into the elevator, and if there is someone else in it, he goes back to the 10th floor. \n On rainy days he also goes directly to his floor. \n On all other days, he goes to the 7th floor and walks up 3 flights of stairs to his apartment. \n Why?");
@@ -358,7 +353,7 @@ System.out.println("red line 1");
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("x is " + e.getX() + " y is " + e.getY());
+		//System.out.println("x is " + e.getX() + " y is " + e.getY());
 	}
 
 	@Override
