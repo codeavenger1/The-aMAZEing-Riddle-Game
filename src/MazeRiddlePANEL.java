@@ -1,5 +1,7 @@
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,6 +18,7 @@ import javax.swing.Timer;
 
 public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListener, MouseListener {
 	Timer timer;
+	Robot robot;
 	boolean test = false;
 	public static BufferedImage maze1Img;
 	public static BufferedImage dinoImg;
@@ -25,7 +28,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public static int Line1x = 406;
 	public static int Line1y = 20;
 	public static int Line2x = 407;
-	public static int Line2y = 67;
+	public static int Line2y = 75;
 	public static int Line3x = 231;
 	public static int Line3y = 75;
 	public static int Line4x = 110;
@@ -70,12 +73,12 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public MazeRiddlePANEL() {
 		// TODO Auto-generated constructor stub
 		this.timer = new Timer(1000 / 60, this);
-
 		try {
+			robot = new Robot();
 			maze1Img = ImageIO.read(this.getClass().getResourceAsStream("test1easyMaze.png"));
 			dinoImg = ImageIO.read(this.getClass().getResourceAsStream("Dino.png"));
 			LineImg = ImageIO.read(this.getClass().getResourceAsStream("redline1.png"));
-		} catch (IOException e) {
+		} catch (IOException | AWTException e) {
 			e.printStackTrace();
 		}
 
@@ -106,16 +109,16 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		line14.draw(g,LineImg);
 		
 		
-		canMoveTo(dino.x + (dino.width / 2), dino.y); // top middle dot
+		canMoveTo(dino.x + (dino.width / 2), dino.y+10); // top middle dot
 		canMoveTo(dino.x, dino.y + (dino.height / 2)); // left middle dot
-		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height)); // bottom middle dot
+		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // bottom middle dot
 		canMoveTo(dino.x + (dino.width-10), dino.y + (dino.height / 2)); // right middle dot
 
-		g.setColor(Color.BLUE);
-		g.fillRect(dino.x + (dino.width / 2 ), dino.y, 2, 2); // top middle dot
-		g.fillRect(dino.x, dino.y + (dino.height / 2 ), 2, 2); // left middle dot
-		g.fillRect(dino.x + (dino.width / 2), dino.y + (dino.height-2), 2, 2); // bottom middle dot
-		g.fillRect(dino.x + (dino.width-10), dino.y + (dino.height / 2), 2, 2); // right middle dot
+//		g.setColor(Color.GREEN.darker().darker());
+//		g.fillRect(dino.x + (dino.width / 2), dino.y+10, 2, 2); // top middle dot
+//		g.fillRect(dino.x, dino.y + (dino.height / 2 ), 2, 2); // left middle dot
+//		g.fillRect(dino.x + (dino.width / 2), dino.y + (dino.height-10), 2, 2); // bottom middle dot
+//		g.fillRect(dino.x + (dino.width-10), dino.y + (dino.height / 2), 2, 2); // right middle dot
 	}
 
 	void startGame() {
@@ -130,6 +133,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			dino.moveRight();
@@ -143,9 +147,9 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	}
 
 	public void canMoveTo(int x, int y) {
-		int mazeColor = maze1Img.getRGB(x, y);
-	
-			
+		Color color = robot.getPixelColor(x, y);
+		int mazeColor = color.getRGB();
+			System.out.println(mazeColor);
 		if (mazeColor < -400000) {
 			System.out.println("riddle");
 			tellRiddle(x, y);
@@ -156,7 +160,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 			dino.y = 17;
 			System.out.println(mazeColor);
 			System.out.println("collided");
-
+			
 			line.setVisible(true);
 			line2.setVisible(true);
 			line3.setVisible(true);
@@ -190,32 +194,31 @@ System.out.println("red line 1");
 				line.setVisible(false);
 				JOptionPane.showMessageDialog(null, "You are correct!");
 				dino.x = Line1x - 17;
-				dino.y = Line1y + 2;
+				dino.y = Line1y - 1;
 			} else if (riddle1.equalsIgnoreCase("candle")) {
 				line.setVisible(false);
 				JOptionPane.showMessageDialog(null, "You are correct!");
 				dino.x = Line1x - 17;
-				dino.y = Line1y + 2;
+				dino.y = Line1y - 1;
 				
 			}
 			else if (riddle1.equalsIgnoreCase("a pencil")) {
 				line.setVisible(false);
 				JOptionPane.showMessageDialog(null, "You are correct!");
 				dino.x = Line1x - 17;
-				dino.y = Line1y+2;
+				dino.y = Line1y - 1;
 			}
 			else if (riddle1.equalsIgnoreCase("a candle")) {
 				line.setVisible(false);
 				JOptionPane.showMessageDialog(null, "You are correct!");
 				dino.x = Line1x - 17;
-				dino.y = Line1y+2;
+				dino.y = Line1y - 1;
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
 				dino.x = 417;
 				dino.y = 17;
-				line.x = 406;
-				line.y = 20;
+				line.setVisible(true);
 			}
 
 		}
@@ -238,8 +241,7 @@ System.out.println("red line 1");
 				JOptionPane.showMessageDialog(null, "Nice try, but....YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
 				dino.x = 417;
 				dino.y = 17;
-				line2.x = 407;
-				line2.y = 67;
+				line2.setVisible(true);
 			}
 
 		}
