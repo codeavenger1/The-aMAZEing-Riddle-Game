@@ -121,6 +121,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 //		g.fillRect(dino.x + (dino.width-10), dino.y + (dino.height / 2), 2, 2); // right middle dot
 	}
 
+	
 	void startGame() {
 		timer.start();
 	}
@@ -150,12 +151,12 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		Color color = robot.getPixelColor(x, y);
 		int mazeColor = color.getRGB();
 			System.out.println(mazeColor);
-		if (mazeColor < -400000) {
-			System.out.println("riddle");
+		//if (mazeColor < -400000) {
+		//	System.out.println("riddle");
 			tellRiddle(x, y);
-		}
+		//}
 
-		if (mazeColor <= -16000000) {
+		if (mazeColor <= -16777216) {
 			dino.x = 417;
 			dino.y = 17;
 			System.out.println(mazeColor);

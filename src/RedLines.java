@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -14,8 +15,9 @@ public class RedLines extends mazeRiddleGameOBJECT {
 	}
 	void draw(Graphics g, BufferedImage line){
 		if (visible == true){
-			g.drawImage(line, x, y, width, height, null);
-	
+			//g.drawImage(line, x, y, width, height, null);
+			g.setColor(Color.RED);
+	g.fillRect(x, y, width, height);
 		}
 			}
 	void setVisible(boolean visible){
