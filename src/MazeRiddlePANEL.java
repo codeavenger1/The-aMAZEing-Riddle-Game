@@ -111,7 +111,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		
 		canMoveTo(dino.x + (dino.width / 2), dino.y+10); // top middle dot
 		canMoveTo(dino.x, dino.y + (dino.height / 2)); // left middle dot
-		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // bottom middle dot
+		//canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // bottom middle dot
 		canMoveTo(dino.x + (dino.width-10), dino.y + (dino.height / 2)); // right middle dot
 
 //		g.setColor(Color.GREEN.darker().darker());
@@ -150,13 +150,14 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public void canMoveTo(int x, int y) {
 		Color color = robot.getPixelColor(x, y);
 		int mazeColor = color.getRGB();
-			System.out.println(mazeColor);
+		System.out.println(mazeColor);
 		//if (mazeColor < -400000) {
 		//	System.out.println("riddle");
 			tellRiddle(x, y);
 		//}
 
-		if (mazeColor <= -16777216) {
+		if (mazeColor == -16777216) {
+			
 			dino.x = 417;
 			dino.y = 17;
 			System.out.println(mazeColor);
