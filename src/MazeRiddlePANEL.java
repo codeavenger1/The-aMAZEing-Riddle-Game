@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -111,7 +112,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		
 		canMoveTo(dino.x + (dino.width / 2), dino.y+10); // top middle dot
 		canMoveTo(dino.x, dino.y + (dino.height / 2)); // left middle dot
-		//canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // bottom middle dot
+		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // bottom middle dot
 		canMoveTo(dino.x + (dino.width-10), dino.y + (dino.height / 2)); // right middle dot
 
 //		g.setColor(Color.GREEN.darker().darker());
@@ -151,12 +152,13 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		Color color = robot.getPixelColor(x, y);
 		int mazeColor = color.getRGB();
 		System.out.println(mazeColor);
+		int backgroundcolor = maze1Img.getRGB(x, y);
 		//if (mazeColor < -400000) {
 		//	System.out.println("riddle");
 			tellRiddle(x, y);
 		//}
 
-		if (mazeColor == -16777216) {
+		if (backgroundcolor == -16777216) {
 			
 			dino.x = 417;
 			dino.y = 17;
@@ -185,153 +187,149 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		timer.stop();
 
 		if (x > line.x - line.height && x < line.x + line.width && y > line.y && y < line.y + line.height && line.visible) {
-			System.out.println("line.x" + line.x);
-			System.out.println("line.x + line.width" + (line.x + line.width));
-			System.out.println("dino.x" + dino.x);
-System.out.println("red line 1");
-
-			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets shorter, the older it becomes?");
-			
-			if (riddle1.equalsIgnoreCase("pencil")){
-				line.setVisible(false);
-				JOptionPane.showMessageDialog(null, "You are correct!");
-				dino.x = Line1x - 17;
-				dino.y = Line1y - 1;
-			} else if (riddle1.equalsIgnoreCase("candle")) {
-				line.setVisible(false);
-				JOptionPane.showMessageDialog(null, "You are correct!");
-				dino.x = Line1x - 17;
-				dino.y = Line1y - 1;
-				
-			}
-			else if (riddle1.equalsIgnoreCase("a pencil")) {
-				line.setVisible(false);
-				JOptionPane.showMessageDialog(null, "You are correct!");
-				dino.x = Line1x - 17;
-				dino.y = Line1y - 1;
-			}
-			else if (riddle1.equalsIgnoreCase("a candle")) {
-				line.setVisible(false);
-				JOptionPane.showMessageDialog(null, "You are correct!");
-				dino.x = Line1x - 17;
-				dino.y = Line1y - 1;
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
-				dino.x = 417;
-				dino.y = 17;
-				line.setVisible(true);
-			}
+			riddleChooser();
 
 		}
-		if (x > line2.x - line2.height && x < line2.x + line2.width && y > line2.y && y < line2.y + line2.height && line2.visible) {
-
-			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets wetter the more it dries?");
-			if (riddle1.equalsIgnoreCase("towel")) {
-				line2.setVisible(false);
-				JOptionPane.showMessageDialog(null, "Correct! Great job!");
-				dino.x = Line2x + 10;
-				dino.y = Line2y + 17;
-			}
-			else if (riddle1.equalsIgnoreCase("a towel")) {
-				line2.setVisible(false);
-				JOptionPane.showMessageDialog(null, "Correct! Great job!");
-				dino.x = Line2x + 10;
-				dino.y = Line2y + 17;
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "Nice try, but....YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
-				dino.x = 417;
-				dino.y = 17;
-				line2.setVisible(true);
-			}
-
-		}
-		if (x > line3.x - line3.height && x < line3.x + line3.width && y > line3.y && y < line3.y + line3.height) {
-			
-			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat has a face and two hands, but no arms or legs?");
-			if (riddle1.equalsIgnoreCase("a clock")) {
-				line3.setVisible(false);
-				JOptionPane.showMessageDialog(null, "Yay! Nice job!");
-				dino.x = Line3x;
-				dino.y = Line3y+5;
-			}
-			else if (riddle1.equalsIgnoreCase("clock")) {
-				line3.setVisible(false);
-				JOptionPane.showMessageDialog(null, "Yay! Nice job!");
-				dino.x = Line3x;
-				dino.y = Line3y;
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "WRONG!!  \nStart again and answer this riddle to pass this line.");
-				dino.x = 417;
-				dino.y = 17;
-				line3.x = 231;
-				line3.y = 75;
-			}
 		
-		}
-		if (x > line4.x - line4.height && x < line4.x + line4.width && y > line4.y && y < line4.y + line4.height) {
+//			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets shorter, the older it becomes?");
+//			
+//			if (riddle1.equalsIgnoreCase("pencil")){
+//				line.setVisible(false);
+//				JOptionPane.showMessageDialog(null, "You are correct!");
+//				dino.x = Line1x - 17;
+//				dino.y = Line1y - 1;
+//			} else if (riddle1.equalsIgnoreCase("candle")) {
+//				line.setVisible(false);
+//				JOptionPane.showMessageDialog(null, "You are correct!");
+//				dino.x = Line1x - 17;
+//				dino.y = Line1y - 1;
+				
+//			}
+//			else if (riddle1.equalsIgnoreCase("a pencil")) {
+//				line.setVisible(false);
+//				JOptionPane.showMessageDialog(null, "You are correct!");
+//				dino.x = Line1x - 17;
+//				dino.y = Line1y - 1;
+//			}
+//			else if (riddle1.equalsIgnoreCase("a candle")) {
+//				line.setVisible(false);
+//				JOptionPane.showMessageDialog(null, "You are correct!");
+//				dino.x = Line1x - 17;
+//				dino.y = Line1y - 1;
+//			}
+//			else {
+//				JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
+//				dino.x = 417;
+//				dino.y = 17;
+//				line.setVisible(true);
+//			}
+//
+//		}
+//		if (x > line2.x - line2.height && x < line2.x + line2.width && y > line2.y && y < line2.y + line2.height && line2.visible) {
+//
+//			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets wetter the more it dries?");
+//			if (riddle1.equalsIgnoreCase("towel")) {
+//				line2.setVisible(false);
+//				JOptionPane.showMessageDialog(null, "Correct! Great job!");
+//				dino.x = Line2x + 10;
+//				dino.y = Line2y + 17;
+//			}
+//			else if (riddle1.equalsIgnoreCase("a towel")) {
+//				line2.setVisible(false);
+//				JOptionPane.showMessageDialog(null, "Correct! Great job!");
+//				dino.x = Line2x + 10;
+//				dino.y = Line2y + 17;
+//			}
+//			else {
+//				JOptionPane.showMessageDialog(null, "Nice try, but....YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
+//				dino.x = 417;
+//				dino.y = 17;
+//				line2.setVisible(true);
+//			}
 
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
-		}
-		if (x > line5.x - line5.height && x < line5.x + line5.width && y > line5.y && y < line5.y + line5.height) {
-
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
-		}
-		if (x > line6.x - line6.height && x < line6.x + line6.width && y > line6.y && y < line6.y + line6.height) {
-
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
-		}
-		if (x > line7.x - line7.height && x < line7.x + line7.width && y > line7.y && y < line7.y + line7.height) {
-
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
-		}
-		if (x > line8.x - line8.height && x < line8.x + line8.width && y > line8.y && y < line8.y + line8.height) {
-
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
-		}
-		if (x > line9.x - line9.height && x < line9.x + line9.width && y > line9.y && y < line9.y + line9.height) {
-
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
-		}
-		if (x > line10.x - line10.height && x < line10.x + line10.width && y > line10.y && y < line10.y + line10.height) {
-
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
-		}
-		if (x > line11.x - line11.height && x < line11.x + line11.width && y > line11.y && y < line11.y + line11.height) {
-
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
-		}
-		if (x > line12.x - line12.height && x < line12.x + line12.width && y > line12.y && y < line12.y + line12.height) {
-
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
-		}
-
-		if (x > line13.x - line13.height && x < line13.x + line13.width && y > line13.y && y < line13.y + line13.height) {
-
-			String riddle1 = JOptionPane.showInputDialog("riddle");
-			dino.x = 417;
-			dino.y = 17;
-		}
+//		}
+//		if (x > line3.x - line3.height && x < line3.x + line3.width && y > line3.y && y < line3.y + line3.height) {
+//			
+//			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat has a face and two hands, but no arms or legs?");
+//			if (riddle1.equalsIgnoreCase("a clock")) {
+//				
+//			}
+//			else if (riddle1.equalsIgnoreCase("clock")) {
+//				line3.setVisible(false);
+//				JOptionPane.showMessageDialog(null, "Yay! Nice job!");
+//				dino.x = Line3x;
+//				dino.y = Line3y;
+//			}
+//			else {
+//				JOptionPane.showMessageDialog(null, "WRONG!!  \nStart again and answer this riddle to pass this line.");
+//				dino.x = 417;
+//				dino.y = 17;
+//				line3.x = 231;
+//				line3.y = 75;
+//			}
+//		
+//		}
+//		if (x > line4.x - line4.height && x < line4.x + line4.width && y > line4.y && y < line4.y + line4.height) {
+//
+//			String riddle1 = JOptionPane.showInputDialog("riddle");
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
+//		if (x > line5.x - line5.height && x < line5.x + line5.width && y > line5.y && y < line5.y + line5.height) {
+//
+//			String riddle1 = JOptionPane.showInputDialog("riddle");
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
+//		if (x > line6.x - line6.height && x < line6.x + line6.width && y > line6.y && y < line6.y + line6.height) {
+//
+//			String riddle1 = JOptionPane.showInputDialog("riddle");
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
+//		if (x > line7.x - line7.height && x < line7.x + line7.width && y > line7.y && y < line7.y + line7.height) {
+//
+//			String riddle1 = JOptionPane.showInputDialog("riddle");
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
+//		if (x > line8.x - line8.height && x < line8.x + line8.width && y > line8.y && y < line8.y + line8.height) {
+//
+//			String riddle1 = JOptionPane.showInputDialog("riddle");
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
+//		if (x > line9.x - line9.height && x < line9.x + line9.width && y > line9.y && y < line9.y + line9.height) {
+//
+//			String riddle1 = JOptionPane.showInputDialog("riddle");
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
+//		if (x > line10.x - line10.height && x < line10.x + line10.width && y > line10.y && y < line10.y + line10.height) {
+//
+//			String riddle1 = JOptionPane.showInputDialog("riddle");
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
+//		if (x > line11.x - line11.height && x < line11.x + line11.width && y > line11.y && y < line11.y + line11.height) {
+//
+//			String riddle1 = JOptionPane.showInputDialog("riddle");
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
+//		if (x > line12.x - line12.height && x < line12.x + line12.width && y > line12.y && y < line12.y + line12.height) {
+//
+//			String riddle1 = JOptionPane.showInputDialog("riddle");
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
+//
+//		if (x > line13.x - line13.height && x < line13.x + line13.width && y > line13.y && y < line13.y + line13.height) {
+//
+//			String riddle1 = JOptionPane.showInputDialog("riddle");
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
 
 		if (x > line14.x - line14.height && x < line14.x + line14.width && y > line14.y && y < line14.y + line14.height) {
 
@@ -346,8 +344,43 @@ System.out.println("red line 1");
 			dino.y = 17;
 		}
 		timer.start();
+	
 	}
-
+public void riddleChooser(){
+	int rand = new Random().nextInt(3);
+	String[]riddle1= {"Answer this riddle to pass this line: \nWhat gets shorter, the older it becomes?" , "Answer this riddle to pass this line: \nWhat gets wetter the more it dries?" , "Answer this riddle to pass this line: \nWhat has a face and two hands, but no arms or legs?" };
+	String[]answer1= {"a candle" , "a towel" , "a clock"};
+	String ans = JOptionPane.showInputDialog(riddle1[rand]);
+	if (ans.equals(answer1[rand])) {
+		JOptionPane.showMessageDialog(null, "You are correct!");
+		line.setVisible(false);
+		dino.x = Line1x - 17;
+		dino.y = Line1y - 1;
+	}
+	else {
+		JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
+		dino.x = 417;
+		dino.y = 17;
+	}
+	
+	int randy = new Random().nextInt(3);
+	String[]riddle2 = {"Answer this riddle to pass this line: \nWhat gets shorter, the older it becomes?" , "Answer this riddle to pass this line: \nWhat gets wetter the more it dries?" , "Answer this riddle to pass this line: \nWhat has a face and two hands, but no arms or legs?" };
+	String[]answer2 = {"a candle" , "a towel" , "a clock"};
+	String ansy = JOptionPane.showInputDialog(riddle2[randy]);
+	if (ansy.equals(answer2[randy])) {
+		JOptionPane.showMessageDialog(null, "You are correct!");
+		line2.setVisible(false);
+		dino.x = Line2x + 10;
+		dino.y = Line2y + 17;
+	}
+	else {
+		JOptionPane.showMessageDialog(null, "Nice try, but....YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
+		dino.x = 417;
+		dino.y = 17;
+	}
+	
+	
+}
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
