@@ -187,44 +187,17 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		timer.stop();
 
 		if (x > line.x - line.height && x < line.x + line.width && y > line.y && y < line.y + line.height && line.visible) {
-			riddleChooser();
+			riddleChooser(1);
 
 		}
+		if (x > line2.x - line2.height && x < line2.x + line2.width && y > line2.y && y < line2.y + line2.height && line2.visible){
+			riddleChooser(2);
+		}
 		
-//			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets shorter, the older it becomes?");
-//			
-//			if (riddle1.equalsIgnoreCase("pencil")){
-//				line.setVisible(false);
-//				JOptionPane.showMessageDialog(null, "You are correct!");
-//				dino.x = Line1x - 17;
-//				dino.y = Line1y - 1;
-//			} else if (riddle1.equalsIgnoreCase("candle")) {
-//				line.setVisible(false);
-//				JOptionPane.showMessageDialog(null, "You are correct!");
-//				dino.x = Line1x - 17;
-//				dino.y = Line1y - 1;
-				
-//			}
-//			else if (riddle1.equalsIgnoreCase("a pencil")) {
-//				line.setVisible(false);
-//				JOptionPane.showMessageDialog(null, "You are correct!");
-//				dino.x = Line1x - 17;
-//				dino.y = Line1y - 1;
-//			}
-//			else if (riddle1.equalsIgnoreCase("a candle")) {
-//				line.setVisible(false);
-//				JOptionPane.showMessageDialog(null, "You are correct!");
-//				dino.x = Line1x - 17;
-//				dino.y = Line1y - 1;
-//			}
-//			else {
-//				JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
-//				dino.x = 417;
-//				dino.y = 17;
-//				line.setVisible(true);
-//			}
-//
-//		}
+		if (x > line3.x - line3.height && x < line3.x + line3.width && y > line3.y && y < line3.y + line3.height) {
+			riddleChooser(3);
+		}
+
 //		if (x > line2.x - line2.height && x < line2.x + line2.width && y > line2.y && y < line2.y + line2.height && line2.visible) {
 //
 //			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets wetter the more it dries?");
@@ -346,29 +319,32 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		timer.start();
 	
 	}
-public void riddleChooser(){
-	int rand = new Random().nextInt(3);
-	String[]riddle1= {"Answer this riddle to pass this line: \nWhat gets shorter, the older it becomes?" , "Answer this riddle to pass this line: \nWhat gets wetter the more it dries?" , "Answer this riddle to pass this line: \nWhat has a face and two hands, but no arms or legs?" };
-	String[]answer1= {"a candle" , "a towel" , "a clock"};
-	String ans = JOptionPane.showInputDialog(riddle1[rand]);
-	if (ans.equals(answer1[rand])) {
-		JOptionPane.showMessageDialog(null, "You are correct!");
-		line.setVisible(false);
-		dino.x = Line1x - 17;
-		dino.y = Line1y - 1;
-	}
-	else {
-		JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
-		dino.x = 417;
-		dino.y = 17;
+public void riddleChooser(int riddleNum){
+	if (riddleNum == 1) {
+		int rand = new Random().nextInt(3);
+		String[]riddle1= {"Answer this riddle to pass this line: \nWhat gets shorter, the older it becomes?" , "Answer this riddle to pass this line: \nWhat gets wetter the more it dries?" , "Answer this riddle to pass this line: \nWhat has a face and two hands, but no arms or legs?" };
+		String[]answer1= {"a candle" , "a towel" , "a clock"};
+		String ans = JOptionPane.showInputDialog(riddle1[rand]);
+		if (ans.equals(answer1[rand])) {
+			JOptionPane.showMessageDialog(null, "You are correct!");
+			line.setVisible(false);
+			dino.x = Line1x - 17;
+			dino.y = Line1y - 1;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
+			dino.x = 417;
+			dino.y = 17;
+		}	
 	}
 	
+	if (riddleNum == 2) {
 	int randy = new Random().nextInt(3);
-	String[]riddle2 = {"Answer this riddle to pass this line: \nWhat gets shorter, the older it becomes?" , "Answer this riddle to pass this line: \nWhat gets wetter the more it dries?" , "Answer this riddle to pass this line: \nWhat has a face and two hands, but no arms or legs?" };
-	String[]answer2 = {"a candle" , "a towel" , "a clock"};
+	String[]riddle2 = {"Answer this riddle to pass this line: \nTimmy's mother has three children. The first was named April, the next was neamed May. What is the third child's name?" , "Answer this riddle to pass this line: \nWhat belongs to you but is used more by others?" , "Answer this riddle to pass this line: \nWhat goes up but never comes down?" };
+	String[]answer2 = {"Timmy" , "your name" , "your age"};
 	String ansy = JOptionPane.showInputDialog(riddle2[randy]);
 	if (ansy.equals(answer2[randy])) {
-		JOptionPane.showMessageDialog(null, "You are correct!");
+		JOptionPane.showMessageDialog(null, "Correct! Good job!");
 		line2.setVisible(false);
 		dino.x = Line2x + 10;
 		dino.y = Line2y + 17;
@@ -378,9 +354,27 @@ public void riddleChooser(){
 		dino.x = 417;
 		dino.y = 17;
 	}
+	}
 	
-	
-}
+	if (riddleNum == 3) {
+		int rando = new Random().nextInt(3);
+		String[]riddle3 = {"Answer this riddle to pass this line: \nWhat goes on four feet in the morning, two feet at noon, and three feet in the evening? (hint: one word answer)", "Answer this riddle to pass this line: \nWhat goes on four feet in the morning, two feet at noon, and three feet in the evening? (hint: one word answer)" };
+		String[]answer3 = {"human" , "human"};
+		String anso = JOptionPane.showInputDialog(riddle3[rando]);
+		if (anso.equals(answer3[rando])) {
+			JOptionPane.showMessageDialog(null, "Nice job!!");
+			line3.setVisible(false);
+			dino.x = Line3x;
+			dino.y = Line3y;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "NOPE! \nStart again and answer this riddle to pass this line.");
+			dino.x = 417;
+			dino.y = 17;
+		}
+		}
+} 
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
