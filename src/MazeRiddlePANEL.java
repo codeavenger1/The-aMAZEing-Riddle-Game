@@ -113,7 +113,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		canMoveTo(dino.x + (dino.width / 2), dino.y+10); // top middle dot
 		canMoveTo(dino.x, dino.y + (dino.height / 2)); // left middle dot
 		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // bottom middle dot
-		canMoveTo(dino.x + (dino.width-10), dino.y + (dino.height / 2)); // right middle dot
+		canMoveTo(dino.x + (dino.width-20), dino.y + (dino.height / 2)); // right middle dot
 
 //		g.setColor(Color.GREEN.darker().darker());
 //		g.fillRect(dino.x + (dino.width / 2), dino.y+10, 2, 2); // top middle dot
@@ -195,6 +195,10 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		}
 		
 		if (x > line3.x - line3.height && x < line3.x + line3.width && y > line3.y && y < line3.y + line3.height) {
+			riddleChooser(3);
+		}
+		
+		if (x > line4.x - line4.height && x < line4.x + line4.width && y > line4.y && y < line4.y + line4.height) {
 			riddleChooser(3);
 		}
 
@@ -358,17 +362,34 @@ public void riddleChooser(int riddleNum){
 	
 	if (riddleNum == 3) {
 		int rando = new Random().nextInt(3);
-		String[]riddle3 = {"Answer this riddle to pass this line: \nWhat goes on four feet in the morning, two feet at noon, and three feet in the evening? (hint: one word answer)", "Answer this riddle to pass this line: \nWhat goes on four feet in the morning, two feet at noon, and three feet in the evening? (hint: one word answer)" };
-		String[]answer3 = {"human" , "human"};
+		String[]riddle3 = {"Answer this riddle to pass this line: \nWhat goes on four feet in the morning, two feet at noon, and three feet in the evening? (hint: one word answer)", "Answer this riddle to pass this line: \nWhat 5-letter word becomes shorter when you add two letters to it?" , "Answer this riddle to pass this line: \nWhat is full of holes but still holds water?"};
+		String[]answer3 = {"human" , "short" , "a sponge"};
 		String anso = JOptionPane.showInputDialog(riddle3[rando]);
 		if (anso.equals(answer3[rando])) {
-			JOptionPane.showMessageDialog(null, "Nice job!!");
+			JOptionPane.showMessageDialog(null, "Good job!!");
 			line3.setVisible(false);
 			dino.x = Line3x;
 			dino.y = Line3y;
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "NOPE! \nStart again and answer this riddle to pass this line.");
+			JOptionPane.showMessageDialog(null, "WRONGGG \nStart again and answer this riddle to pass this line.");
+			dino.x = 417;
+			dino.y = 17;
+		}
+		}
+	if (riddleNum == 4) {
+		int randomm = new Random().nextInt(3);
+		String[]riddle4 = {"Answer this riddle to pass this line: \nWhat goes up when rain comes down?", "Answer this riddle to pass this line: \nWhat travels around the world but stays in one spot?" , "Answer this riddle to pass this line: \nIf I have it, I don’t share it. If I share it, I don’t have it. What is it?" };
+		String[]answer4 = {"an umbrella" , "a stamp" , "a secret"};
+		String ansorr = JOptionPane.showInputDialog(riddle4[randomm]);
+		if (ansorr.equals(answer4[randomm])) {
+			JOptionPane.showMessageDialog(null, "AMAZING! On to your 5th round... (out of 15 hehe)");
+			line4.setVisible(false);
+			dino.x = Line4x;
+			dino.y = Line4y;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "TRY AGAIN LOL! \nStart again and answer this riddle to pass this line.");
 			dino.x = 417;
 			dino.y = 17;
 		}
