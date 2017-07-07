@@ -194,88 +194,31 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 			riddleChooser(2);
 		}
 		
-		if (x > line3.x - line3.height && x < line3.x + line3.width && y > line3.y && y < line3.y + line3.height) {
+		if (x > line3.x - line3.height && x < line3.x + line3.width && y > line3.y && y < line3.y + line3.height && line3.visible) {
 			riddleChooser(3);
 		}
 		
-		if (x > line4.x - line4.height && x < line4.x + line4.width && y > line4.y && y < line4.y + line4.height) {
-			riddleChooser(3);
+		if (x > line4.x && x < line4.x + line4.width && y > line4.y && y < line4.y + line4.height && line4.visible) {
+			riddleChooser(4);
+		}
+		
+		if (x > line5.x && x < line5.x + line5.width && y > line5.y && y < line5.y + line5.height && line5.visible) {
+			riddleChooser(5);
+		}
+		
+		if (x > line6.x && x < line6.x + line6.width && y > line6.y && y < line6.y + line6.height && line6.visible) {
+			riddleChooser(6);
 		}
 
-//		if (x > line2.x - line2.height && x < line2.x + line2.width && y > line2.y && y < line2.y + line2.height && line2.visible) {
-//
-//			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat gets wetter the more it dries?");
-//			if (riddle1.equalsIgnoreCase("towel")) {
-//				line2.setVisible(false);
-//				JOptionPane.showMessageDialog(null, "Correct! Great job!");
-//				dino.x = Line2x + 10;
-//				dino.y = Line2y + 17;
-//			}
-//			else if (riddle1.equalsIgnoreCase("a towel")) {
-//				line2.setVisible(false);
-//				JOptionPane.showMessageDialog(null, "Correct! Great job!");
-//				dino.x = Line2x + 10;
-//				dino.y = Line2y + 17;
-//			}
-//			else {
-//				JOptionPane.showMessageDialog(null, "Nice try, but....YOU ARE WRONG!!! \nStart again and answer this riddle to pass this line.");
-//				dino.x = 417;
-//				dino.y = 17;
-//				line2.setVisible(true);
-//			}
+		if (x > line7.x - line7.height && x < line7.x + line7.width && y > line7.y && y < line7.y + line7.height && line7.visible) {
+			riddleChooser(7);
+		}
 
-//		}
-//		if (x > line3.x - line3.height && x < line3.x + line3.width && y > line3.y && y < line3.y + line3.height) {
-//			
-//			String riddle1 = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat has a face and two hands, but no arms or legs?");
-//			if (riddle1.equalsIgnoreCase("a clock")) {
-//				
-//			}
-//			else if (riddle1.equalsIgnoreCase("clock")) {
-//				line3.setVisible(false);
-//				JOptionPane.showMessageDialog(null, "Yay! Nice job!");
-//				dino.x = Line3x;
-//				dino.y = Line3y;
-//			}
-//			else {
-//				JOptionPane.showMessageDialog(null, "WRONG!!  \nStart again and answer this riddle to pass this line.");
-//				dino.x = 417;
-//				dino.y = 17;
-//				line3.x = 231;
-//				line3.y = 75;
-//			}
-//		
-//		}
-//		if (x > line4.x - line4.height && x < line4.x + line4.width && y > line4.y && y < line4.y + line4.height) {
-//
-//			String riddle1 = JOptionPane.showInputDialog("riddle");
-//			dino.x = 417;
-//			dino.y = 17;
-//		}
-//		if (x > line5.x - line5.height && x < line5.x + line5.width && y > line5.y && y < line5.y + line5.height) {
-//
-//			String riddle1 = JOptionPane.showInputDialog("riddle");
-//			dino.x = 417;
-//			dino.y = 17;
-//		}
-//		if (x > line6.x - line6.height && x < line6.x + line6.width && y > line6.y && y < line6.y + line6.height) {
-//
-//			String riddle1 = JOptionPane.showInputDialog("riddle");
-//			dino.x = 417;
-//			dino.y = 17;
-//		}
-//		if (x > line7.x - line7.height && x < line7.x + line7.width && y > line7.y && y < line7.y + line7.height) {
-//
-//			String riddle1 = JOptionPane.showInputDialog("riddle");
-//			dino.x = 417;
-//			dino.y = 17;
-//		}
-//		if (x > line8.x - line8.height && x < line8.x + line8.width && y > line8.y && y < line8.y + line8.height) {
-//
-//			String riddle1 = JOptionPane.showInputDialog("riddle");
-//			dino.x = 417;
-//			dino.y = 17;
-//		}
+		if (x > line8.x - line8.height && x < line8.x + line8.width && y > line8.y && y < line8.y + line8.height && line8.visible) {
+			riddleChooser(8);
+		}
+
+		
 //		if (x > line9.x - line9.height && x < line9.x + line9.width && y > line9.y && y < line9.y + line9.height) {
 //
 //			String riddle1 = JOptionPane.showInputDialog("riddle");
@@ -308,18 +251,18 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 //			dino.y = 17;
 //		}
 
-		if (x > line14.x - line14.height && x < line14.x + line14.width && y > line14.y && y < line14.y + line14.height) {
-
-			String riddle14 = JOptionPane.showInputDialog(
-					"A man lives on the 10th floor of an apartment building.\n Every morning he takes the elevator all the way down to the bottom and goes to work.\n In the evening, when he comes back from work, he gets into the elevator, and if there is someone else in it, he goes back to the 10th floor. \n On rainy days he also goes directly to his floor. \n On all other days, he goes to the 7th floor and walks up 3 flights of stairs to his apartment. \n Why?");
-			if (riddle14.equals("He is a midget.")) {
-				JOptionPane.showMessageDialog(null, "You are correct!");
-			} else {
-				JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!!");
-			}
-			dino.x = 417;
-			dino.y = 17;
-		}
+//		if (x > line14.x - line14.height && x < line14.x + line14.width && y > line14.y && y < line14.y + line14.height) {
+//
+//			String riddle14 = JOptionPane.showInputDialog(
+//					"A man lives on the 10th floor of an apartment building.\n Every morning he takes the elevator all the way down to the bottom and goes to work.\n In the evening, when he comes back from work, he gets into the elevator, and if there is someone else in it, he goes back to the 10th floor. \n On rainy days he also goes directly to his floor. \n On all other days, he goes to the 7th floor and walks up 3 flights of stairs to his apartment. \n Why?");
+//			if (riddle14.equals("He is a midget.")) {
+//				JOptionPane.showMessageDialog(null, "You are correct!");
+//			} else {
+//				JOptionPane.showMessageDialog(null, "C'mon people! Know your facts!!! YOU ARE WRONG!!!");
+//			}
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
 		timer.start();
 	
 	}
@@ -390,6 +333,74 @@ public void riddleChooser(int riddleNum){
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "TRY AGAIN LOL! \nStart again and answer this riddle to pass this line.");
+			dino.x = 417;
+			dino.y = 17;
+		}
+		}
+	if (riddleNum == 5) {
+		int randomm = new Random().nextInt(3);
+		String[]riddle5 = {"Answer this riddle to pass this line: \nWhat kind of room has no doors nor windows?", "Answer this riddle to pass this line: \nWhat gets broken without being held?" , "Answer this riddle to pass this line: \nWhat can you catch but not throw?" };
+		String[]answer5 = {"a mushroom" , "a promise" , "a cold"};
+		String ansorr = JOptionPane.showInputDialog(riddle5[randomm]);
+		if (ansorr.equals(answer5[randomm])) {
+			JOptionPane.showMessageDialog(null, "Nice job! Keep it up!");
+			line5.setVisible(false);
+			dino.x = Line5x;
+			dino.y = Line5y;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "HAHA NOPE! \nStart again and answer this riddle to pass this line.");
+			dino.x = 417;
+			dino.y = 17;
+		}
+		}
+	if (riddleNum == 6) {
+		int randomm = new Random().nextInt(3);
+		String[]riddle6 = {"Answer this riddle to pass this line: \nWhich weighs more: a pound of feathers or a pound of bricks?", "Answer this riddle to pass this line: \nWhat building has the most stories?" , "Answer this riddle to pass this line: \nWhat has four fingers and one thumb, but is not alive?" };
+		String[]answer6 = {"neither" , "a library" , "a glove"};
+		String ansorr = JOptionPane.showInputDialog(riddle6[randomm]);
+		if (ansorr.equals(answer6[randomm])) {
+			JOptionPane.showMessageDialog(null, "On to the next round.....");
+			line6.setVisible(false);
+			dino.x = Line6x;
+			dino.y = Line6y;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Nice try but YOU ARE WRONG! \nStart again and answer this riddle to pass this line.");
+			dino.x = 417;
+			dino.y = 17;
+		}
+		}
+	if (riddleNum == 7) {
+		int randomm = new Random().nextInt(3);
+		String[]riddle7 = {"Answer this riddle to pass this line: \nThe more there is, the less you see. What is it?", "Answer this riddle to pass this line: \nDogs do it and trees have it. What is it?" , "Answer this riddle to pass this line: \nWhat come out at night without being called, and are lost in the day without being stolen?" };
+		String[]answer7 = {"darkness" , "bark" , "stars"};
+		String ansorr = JOptionPane.showInputDialog(riddle7[randomm]);
+		if (ansorr.equals(answer7[randomm])) {
+			JOptionPane.showMessageDialog(null, "Half way there!");
+			line7.setVisible(false);
+			dino.x = Line7x;
+			dino.y = Line7y;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "You are....NOT CORRECT! \nStart again and answer this riddle to pass this line.");
+			dino.x = 417;
+			dino.y = 17;
+		}
+		}
+	if (riddleNum == 8) {
+		int randomm = new Random().nextInt(3);
+		String[]riddle8 = {"Answer this riddle to pass this line: \nThe more you take, the more you leave behind. What am I?", "Answer this riddle to pass this line: \nWhat company makes billions of dollars selling Windows?" , "Answer this riddle to pass this line: \nWhat come out at night without being called, and are lost in the day without being stolen?" };
+		String[]answer8 = {"footsteps" , "Microsoft" , "stars"};
+		String ansorr = JOptionPane.showInputDialog(riddle8[randomm]);
+		if (ansorr.equals(answer8[randomm])) {
+			JOptionPane.showMessageDialog(null, "More than half way there!");
+			line8.setVisible(false);
+			dino.x = Line9x;
+			dino.y = Line9y;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "WRONG SORRY NOT SORRY! \nStart again and answer this riddle to pass this line.");
 			dino.x = 417;
 			dino.y = 17;
 		}
