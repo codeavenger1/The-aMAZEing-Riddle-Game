@@ -390,14 +390,14 @@ public void riddleChooser(int riddleNum){
 		}
 	if (riddleNum == 8) {
 		int randomm = new Random().nextInt(3);
-		String[]riddle8 = {"Answer this riddle to pass this line: \nThe more you take, the more you leave behind. What am I?", "Answer this riddle to pass this line: \nWhat company makes billions of dollars selling Windows?" , "Answer this riddle to pass this line: \nWhat come out at night without being called, and are lost in the day without being stolen?" };
+		String[]riddle8 = {"Answer this riddle to pass this line: \nThe more you take, the more you leave behind. What am I?", "Answer this riddle to pass this line: \nWhat company makes billions of dollars selling Windows?" , "Answer this riddle to pass this line: \nMr. Blue lives in the blue house, Mr. Pink lives in the pink house, and Mr. Brown lives in the brown house. Who lives in the white house?" };
 		String[]answer8 = {"footsteps" , "Microsoft" , "stars"};
 		String ansorr = JOptionPane.showInputDialog(riddle8[randomm]);
 		if (ansorr.equals(answer8[randomm])) {
 			JOptionPane.showMessageDialog(null, "More than half way there!");
 			line8.setVisible(false);
-			dino.x = Line9x;
-			dino.y = Line9y;
+			dino.x = Line8x;
+			dino.y = Line8y;
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "WRONG SORRY NOT SORRY! \nStart again and answer this riddle to pass this line.");
@@ -405,6 +405,59 @@ public void riddleChooser(int riddleNum){
 			dino.y = 17;
 		}
 		}
+	if (riddleNum == 9) {
+		int randomm = new Random().nextInt(3);
+		String[]riddle9 = {"Answer this riddle to pass this line: \nPoor people have it. Rich people need it. If you eat it you die. what is it?", "Answer this riddle to pass this line: \nFeed me and I live, yet give me a drink and I die. What am I?" , "Answer this riddle to pass this line: \nWhich vehicle is spelled the same forwards and backwards?" };
+		String[]answer9 = {"nothing" , "fire" , "racecar"};
+		String ansorr = JOptionPane.showInputDialog(riddle9[randomm]);
+		if (ansorr.equals(answer9[randomm])) {
+			JOptionPane.showMessageDialog(null, "Correct! So close!");
+			line9.setVisible(false);
+			dino.x = Line9x;
+			dino.y = Line9y;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "ummmmm, no. \nStart again and answer this riddle to pass this line.");
+			dino.x = 417;
+			dino.y = 17;
+		}
+		}
+	if (riddleNum == 10) {
+		int randomm = new Random().nextInt(3);
+		String[]riddle9 = {"Answer this riddle to pass this line: \nPoor people have it. Rich people need it. If you eat it you die. what is it?", "Answer this riddle to pass this line: \nFeed me and I live, yet give me a drink and I die. What am I?" , "Answer this riddle to pass this line: \nWhich vehicle is spelled the same forwards and backwards?" };
+		String[]answer9 = {"nothing" , "fire" , "racecar"};
+		String ansorr = JOptionPane.showInputDialog(riddle9[randomm]);
+		if (ansorr.equals(answer9[randomm])) {
+			JOptionPane.showMessageDialog(null, "Correct! So close to the end!");
+			line9.setVisible(false);
+			//dino.x = Line9x;
+			dino.y = Line9y;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "ummmmm, no. \nStart again and answer this riddle to pass this line.");
+			dino.x = 417;
+			dino.y = 17;
+		}
+		}
+	if (riddleNum == 11) {
+		JOptionPane.showMessageDialog(null, "Congradulations! This is your 11th riddle. From this point on, there will be longer and harder riddles. Enjoy :)");
+		int randomm = new Random().nextInt(3);
+		String[]riddle9 = {"Answer this riddle to pass this line: \nWhat common English verb becomes its own past tense by rearranging its letters? List both words and use the word 'and' in the middle of them in your answer." };
+		String[]answer9 = {"eat and ate"};
+		String ansorr = JOptionPane.showInputDialog(riddle9[randomm]);
+		if (ansorr.equals(answer9[randomm])) {
+			JOptionPane.showMessageDialog(null, "Yeppers!");
+			line9.setVisible(false);
+			dino.x = Line9x;
+			dino.y = Line9y;
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "ummmmm, no. \nStart again and answer this riddle to pass this line.");
+			dino.x = 417;
+			dino.y = 17;
+		}
+		}
+
 } 
 
 	@Override
