@@ -24,8 +24,8 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public static BufferedImage maze1Img;
 	public static BufferedImage dinoImg;
 	public static BufferedImage LineImg;
-	public static int MAZESTARTx = 417;
-	public static int MAZESTARTy = 17;
+	public static int MAZESTARTx = 890;//417;
+	public static int MAZESTARTy = 80; //17;
 	public static int Line1x = 406;
 	public static int Line1y = 20;
 	public static int Line2x = 407;
@@ -210,33 +210,25 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 			riddleChooser(6);
 		}
 
-		if (x > line7.x - line7.height && x < line7.x + line7.width && y > line7.y && y < line7.y + line7.height && line7.visible) {
+		if (x > line7.x && x < line7.x + line7.width && y > line7.y && y < line7.y + line7.height && line7.visible) {
 			riddleChooser(7);
 		}
 
 		if (x > line8.x - line8.height && x < line8.x + line8.width && y > line8.y && y < line8.y + line8.height && line8.visible) {
 			riddleChooser(8);
 		}
-
 		
-//		if (x > line9.x - line9.height && x < line9.x + line9.width && y > line9.y && y < line9.y + line9.height) {
-//
-//			String riddle1 = JOptionPane.showInputDialog("riddle");
-//			dino.x = 417;
-//			dino.y = 17;
-//		}
-//		if (x > line10.x - line10.height && x < line10.x + line10.width && y > line10.y && y < line10.y + line10.height) {
-//
-//			String riddle1 = JOptionPane.showInputDialog("riddle");
-//			dino.x = 417;
-//			dino.y = 17;
-//		}
-//		if (x > line11.x - line11.height && x < line11.x + line11.width && y > line11.y && y < line11.y + line11.height) {
-//
-//			String riddle1 = JOptionPane.showInputDialog("riddle");
-//			dino.x = 417;
-//			dino.y = 17;
-//		}
+		if (x > line9.x && x < line9.x + line9.width && y > line9.y && y < line9.y + line9.height && line9.visible) {
+			riddleChooser(9);
+		}
+		
+		if (x > line10.x - line10.height && x < line10.x + line10.width && y > line10.y && y < line10.y + line10.height) {
+			riddleChooser(10);	
+		}
+		
+		if (x > line11.x - line11.height && x < line11.x + line11.width && y > line11.y && y < line11.y + line11.height) {
+riddleChooser(11);
+	}
 //		if (x > line12.x - line12.height && x < line12.x + line12.width && y > line12.y && y < line12.y + line12.height) {
 //
 //			String riddle1 = JOptionPane.showInputDialog("riddle");
@@ -413,7 +405,7 @@ public void riddleChooser(int riddleNum){
 		if (ansorr.equals(answer9[randomm])) {
 			JOptionPane.showMessageDialog(null, "Correct! So close!");
 			line9.setVisible(false);
-			dino.x = Line9x;
+			dino.x = Line9x+5;
 			dino.y = Line9y;
 		}
 		else {
@@ -424,14 +416,14 @@ public void riddleChooser(int riddleNum){
 		}
 	if (riddleNum == 10) {
 		int randomm = new Random().nextInt(3);
-		String[]riddle9 = {"Answer this riddle to pass this line: \nPoor people have it. Rich people need it. If you eat it you die. what is it?", "Answer this riddle to pass this line: \nFeed me and I live, yet give me a drink and I die. What am I?" , "Answer this riddle to pass this line: \nWhich vehicle is spelled the same forwards and backwards?" };
-		String[]answer9 = {"nothing" , "fire" , "racecar"};
-		String ansorr = JOptionPane.showInputDialog(riddle9[randomm]);
-		if (ansorr.equals(answer9[randomm])) {
+		String[]riddle10 = {"Answer this riddle to pass this line: \nPoor people have it. Rich people need it. If you eat it you die. what is it?", "Answer this riddle to pass this line: \nFeed me and I live, yet give me a drink and I die. What am I?" , "Answer this riddle to pass this line: \nWhich vehicle is spelled the same forwards and backwards?" };
+		String[]answer10 = {"nothing" , "fire" , "racecar"};
+		String ansorr = JOptionPane.showInputDialog(riddle10[randomm]);
+		if (ansorr.equals(answer10[randomm])) {
 			JOptionPane.showMessageDialog(null, "Correct! So close to the end!");
 			line9.setVisible(false);
-			//dino.x = Line9x;
-			dino.y = Line9y;
+			dino.x = Line10x;
+			dino.y = Line10y;
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "ummmmm, no. \nStart again and answer this riddle to pass this line.");
@@ -442,14 +434,14 @@ public void riddleChooser(int riddleNum){
 	if (riddleNum == 11) {
 		JOptionPane.showMessageDialog(null, "Congradulations! This is your 11th riddle. From this point on, there will be longer and harder riddles. Enjoy :)");
 		int randomm = new Random().nextInt(3);
-		String[]riddle9 = {"Answer this riddle to pass this line: \nWhat common English verb becomes its own past tense by rearranging its letters? List both words and use the word 'and' in the middle of them in your answer." };
-		String[]answer9 = {"eat and ate"};
-		String ansorr = JOptionPane.showInputDialog(riddle9[randomm]);
-		if (ansorr.equals(answer9[randomm])) {
+		String[]riddle11 = {"Answer this riddle to pass this line: \nWhat common English verb becomes its own past tense by rearranging its letters? List both words and use the word 'and' in the middle of them in your answer." };
+		String[]answer11 = {"eat and ate"};
+		String ansorr = JOptionPane.showInputDialog(riddle11[randomm]);
+		if (ansorr.equals(answer11[randomm])) {
 			JOptionPane.showMessageDialog(null, "Yeppers!");
 			line9.setVisible(false);
-			dino.x = Line9x;
-			dino.y = Line9y;
+			dino.x = Line11x;
+			dino.y = Line11y;
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "ummmmm, no. \nStart again and answer this riddle to pass this line.");
@@ -457,8 +449,28 @@ public void riddleChooser(int riddleNum){
 			dino.y = 17;
 		}
 		}
+	
+	if (riddleNum == 12) {
+		try {
+			ScaryMaze maze = new ScaryMaze();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JOptionPane.showMessageDialog(null, "Surprise! To get passed this line, you must complete this smaller maze by dragging your mouse on the blue line.\nIf you fall off the path you have to restart ;)\nMake sure you get to the purple in order to win!\nGood luck! ");
+		
+			line12.setVisible(false);
+			dino.x = Line11x;
+			dino.y = Line11y;
+		}
+//		else {
+//			JOptionPane.showMessageDialog(null, "ummmmm, no. \nStart again and answer this riddle to pass this line.");
+//			dino.x = 417;
+//			dino.y = 17;
+//		}
+		}
 
-} 
+
 
 	@Override
 	public void keyReleased(KeyEvent e) {
