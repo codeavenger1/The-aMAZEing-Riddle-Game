@@ -222,12 +222,12 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 			riddleChooser(9);
 		}
 		
-		if (x > line10.x - line10.height && x < line10.x + line10.width && y > line10.y && y < line10.y + line10.height) {
-			riddleChooser(10);	
-		}
+		//if (x > line10.x - line10.height && x < line10.x + line10.width && y > line10.y && y < line10.y + line10.height) {
+			//riddleChooser(10);	
+		//}
 		
 		if (x > line11.x - line11.height && x < line11.x + line11.width && y > line11.y && y < line11.y + line11.height) {
-riddleChooser(11);
+			riddleChooser(11);
 	}
 //		if (x > line12.x - line12.height && x < line12.x + line12.width && y > line12.y && y < line12.y + line12.height) {
 //
@@ -409,57 +409,41 @@ public void riddleChooser(int riddleNum){
 			dino.y = Line9y;
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "ummmmm, no. \nStart again and answer this riddle to pass this line.");
-			dino.x = 417;
-			dino.y = 17;
-		}
-		}
-	if (riddleNum == 10) {
-		int randomm = new Random().nextInt(3);
-		String[]riddle10 = {"Answer this riddle to pass this line: \nPoor people have it. Rich people need it. If you eat it you die. what is it?", "Answer this riddle to pass this line: \nFeed me and I live, yet give me a drink and I die. What am I?" , "Answer this riddle to pass this line: \nWhich vehicle is spelled the same forwards and backwards?" };
-		String[]answer10 = {"nothing" , "fire" , "racecar"};
-		String ansorr = JOptionPane.showInputDialog(riddle10[randomm]);
-		if (ansorr.equals(answer10[randomm])) {
-			JOptionPane.showMessageDialog(null, "Correct! So close to the end!");
-			line9.setVisible(false);
-			dino.x = Line10x;
-			dino.y = Line10y;
-		}
-		else {
-			JOptionPane.showMessageDialog(null, "ummmmm, no. \nStart again and answer this riddle to pass this line.");
+			JOptionPane.showMessageDialog(null, "Ummmmm, no. \nStart again and answer this riddle to pass this line.");
 			dino.x = 417;
 			dino.y = 17;
 		}
 		}
 	if (riddleNum == 11) {
-		JOptionPane.showMessageDialog(null, "Congradulations! This is your 11th riddle. From this point on, there will be longer and harder riddles. Enjoy :)");
 		int randomm = new Random().nextInt(3);
-		String[]riddle11 = {"Answer this riddle to pass this line: \nWhat common English verb becomes its own past tense by rearranging its letters? List both words and use the word 'and' in the middle of them in your answer." };
-		String[]answer11 = {"eat and ate"};
+		String[]riddle11 = {"Answer this riddle to pass this line: \n Lives in winter, dies in summer, and grows with its roots upward.  It is a(n)...?", "Answer this riddle to pass this line: \nI’m full of keys but I can’t open any door.  What am I?" , "Answer this riddle to pass this line: \nWhat has three feet but cannot walk?" };
+		String[]answer11 = {"an icicle" , "a piano" , "a yardstick"};
 		String ansorr = JOptionPane.showInputDialog(riddle11[randomm]);
 		if (ansorr.equals(answer11[randomm])) {
-			JOptionPane.showMessageDialog(null, "Yeppers!");
-			line9.setVisible(false);
-			dino.x = Line11x;
-			dino.y = Line11y;
+			JOptionPane.showMessageDialog(null, "Great job!");
+			line11.setVisible(false);
+			dino.x = Line10x;
+			dino.y = Line10y;
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "ummmmm, no. \nStart again and answer this riddle to pass this line.");
+			JOptionPane.showMessageDialog(null, "Try again. \nStart again and answer this riddle to pass this line.");
 			dino.x = 417;
 			dino.y = 17;
 		}
 		}
+
 	
-	if (riddleNum == 12) {
+	if (riddleNum == 10) {
 		try {
 			ScaryMaze maze = new ScaryMaze();
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		JOptionPane.showMessageDialog(null, "Surprise! To get passed this line, you must complete this smaller maze by dragging your mouse on the blue line.\nIf you fall off the path you have to restart ;)\nMake sure you get to the purple in order to win!\nGood luck! ");
 		
-			line12.setVisible(false);
+			line10.setVisible(false);
 			dino.x = Line11x;
 			dino.y = Line11y;
 		}
@@ -468,7 +452,26 @@ public void riddleChooser(int riddleNum){
 //			dino.x = 417;
 //			dino.y = 17;
 //		}
-		}
+		
+
+if (riddleNum == 12) {
+	JOptionPane.showMessageDialog(null, "Congradulations! This is your 12th riddle. From this point on, there will be longer and harder riddles. Good luck :)");
+	int randomm = new Random().nextInt(3);
+	String[]riddle12 = {"Answer this riddle to pass this line: \nWhat common English verb becomes its own past tense by rearranging its letters? List both words and use the word 'and' in the middle of them in your answer. List the words alphabetically." };
+	String[]answer12 = {"ate and eat"};
+	String ansorr = JOptionPane.showInputDialog(riddle12[randomm]);
+	if (ansorr.equals(answer12[randomm])) {
+		JOptionPane.showMessageDialog(null, "Yeppers!\nStart again and answer this riddle to pass this line.");
+		line11.setVisible(false);
+		dino.x = Line11x;
+		dino.y = Line11y;
+	}
+	else {
+		JOptionPane.showMessageDialog(null, "No! Try again! \nStart again and answer this riddle to pass this line.");
+		dino.x = 417;
+		dino.y = 17;
+	}
+	}}	
 
 
 
