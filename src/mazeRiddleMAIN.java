@@ -3,9 +3,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 public class mazeRiddleMAIN {
-	JFrame frame;
+	static JFrame frame;
 	MazeRiddlePANEL panel;
-	static int height = 633;
+	static int height = 655;
 	static int width = 1000;
 	BufferedImage test1;
 

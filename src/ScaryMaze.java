@@ -47,14 +47,13 @@ System.out.println(mouseColor);
 		//6. if the mouse falls off the path (if it is on the background)
 		if (mouseColor == background) {
 		JOptionPane.showMessageDialog(null, "OH NO! You fell off the path! Back to the beginning...of the WHOLE game :( ");
-		System.exit(background);
 		}
 				// call the scare method
 		
 		//10. if the mouse is on the end color
 				if (mouseColor == -5473060) {
 					JOptionPane.showMessageDialog(null, "Great job! You have won!\nSince you won, you are now able to skip to the very last riddle. ");
-				System.exit(background);
+					MazeRiddlePANEL.solveMaze = true;
 				}
 				// pop up a message to tell them they won
 	}

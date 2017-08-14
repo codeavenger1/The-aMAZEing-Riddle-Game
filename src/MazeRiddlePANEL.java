@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -21,11 +22,12 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	Timer timer;
 	Robot robot;
 	boolean test = false;
+	public static boolean solveMaze = false;
 	public static BufferedImage maze1Img;
 	public static BufferedImage dinoImg;
 	public static BufferedImage LineImg;
-	public static int MAZESTARTx = 890;//417;
-	public static int MAZESTARTy = 80; //17;
+	public static int MAZESTARTx = 715;//417;
+	public static int MAZESTARTy = 490; //17;
 	public static int Line1x = 406;
 	public static int Line1y = 20;
 	public static int Line2x = 407;
@@ -45,8 +47,8 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public static int Line9x = 829;
 	public static int Line9y = 365;
 	public static int Line10x = 710;
-	public static int Line10y = 490;
-	public static int Line11x = 710;
+	public static int Line10y = 480;
+	public static int Line11x = 700;
 	public static int Line11y = 490;
 	public static int Line12x = 530;
 	public static int Line12y = 370;
@@ -54,6 +56,8 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public static int Line13y = 370;
 	public static int Line14x = 288;
 	public static int Line14y = 198;
+	public static int Line15x = 650;
+	public static int Line15y = 605;
 
 	MazeRiddleDINO dino = new MazeRiddleDINO(MAZESTARTx, MAZESTARTy, 50, 50);
 	RedLines line = new RedLines(Line1x, Line1y, 8, 55);
@@ -70,6 +74,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	RedLines line12 = new RedLines(Line12x, Line12y, 55, 8);
 	RedLines line13 = new RedLines(Line13x, Line13y, 55, 8);
 	RedLines line14 = new RedLines(Line14x, Line14y, 8, 55);
+	RedLines line15 = new RedLines(Line15x, Line15y, 55, 8);
 
 	public MazeRiddlePANEL() {
 		// TODO Auto-generated constructor stub
@@ -108,6 +113,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		line12.draw(g,LineImg);
 		line13.draw(g,LineImg);
 		line14.draw(g,LineImg);
+		line15.draw(g,LineImg);
 		
 		
 		canMoveTo(dino.x + (dino.width / 2), dino.y+10); // top middle dot
@@ -222,9 +228,9 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 			riddleChooser(9);
 		}
 		
-		//if (x > line10.x - line10.height && x < line10.x + line10.width && y > line10.y && y < line10.y + line10.height) {
-			//riddleChooser(10);	
-		//}
+		if (x > line10.x - line10.height && x < line10.x + line10.width && y > line10.y && y < line10.y + line10.height) {
+			riddleChooser(10);	
+		}
 		
 		if (x > line11.x - line11.height && x < line11.x + line11.width && y > line11.y && y < line11.y + line11.height) {
 			riddleChooser(11);
@@ -403,7 +409,7 @@ public void riddleChooser(int riddleNum){
 		String[]answer9 = {"nothing" , "fire" , "racecar"};
 		String ansorr = JOptionPane.showInputDialog(riddle9[randomm]);
 		if (ansorr.equals(answer9[randomm])) {
-			JOptionPane.showMessageDialog(null, "Correct! So close!");
+			JOptionPane.showMessageDialog(null, "Correct! So close to the end!");
 			line9.setVisible(false);
 			dino.x = Line9x+5;
 			dino.y = Line9y;
@@ -414,6 +420,33 @@ public void riddleChooser(int riddleNum){
 			dino.y = 17;
 		}
 		}
+	if (riddleNum == 10) {
+		try {
+			ScaryMaze maze = new ScaryMaze();
+			JDialog dialog = new JDialog(mazeRiddleMAIN.frame);
+			dialog.getContentPane().add(maze);
+			dialog.setVisible(true);
+			dialog.setSize(801, 600);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JOptionPane.showMessageDialog(null, "Surprise! To get passed this line, you must complete this smaller maze by dragging your mouse on the blue line.\nIf you fall off the path you have to restart ;)\nMake sure you get to the purple in order to win!\nGood luck!\nPRESS ENTER TO CONTINUE ");
+		
+			line10.setVisible(false);
+			dino.x = Line10x;
+			dino.y = Line10y;
+			
+			if (solveMaze == true) {
+				dino.x = 650;
+				dino.y = 555;
+			}
+			else if (solveMaze == false) {
+				JOptionPane.showMessageDialog(null, "Since you could not complete the maze, you must answer each riddle instead of taking the short cut when you won.");
+			}
+			
+			
+		}
 	if (riddleNum == 11) {
 		int randomm = new Random().nextInt(3);
 		String[]riddle11 = {"Answer this riddle to pass this line: \n Lives in winter, dies in summer, and grows with its roots upward.  It is a(n)...?", "Answer this riddle to pass this line: \nI’m full of keys but I can’t open any door.  What am I?" , "Answer this riddle to pass this line: \nWhat has three feet but cannot walk?" };
@@ -422,30 +455,14 @@ public void riddleChooser(int riddleNum){
 		if (ansorr.equals(answer11[randomm])) {
 			JOptionPane.showMessageDialog(null, "Great job!");
 			line11.setVisible(false);
-			dino.x = Line10x;
-			dino.y = Line10y;
+			dino.x = Line11x;
+			dino.y = Line11y;
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "Try again. \nStart again and answer this riddle to pass this line.");
 			dino.x = 417;
 			dino.y = 17;
 		}
-		}
-
-	
-	if (riddleNum == 10) {
-		try {
-			ScaryMaze maze = new ScaryMaze();
-		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		JOptionPane.showMessageDialog(null, "Surprise! To get passed this line, you must complete this smaller maze by dragging your mouse on the blue line.\nIf you fall off the path you have to restart ;)\nMake sure you get to the purple in order to win!\nGood luck! ");
-		
-			line10.setVisible(false);
-			dino.x = Line11x;
-			dino.y = Line11y;
 		}
 //		else {
 //			JOptionPane.showMessageDialog(null, "ummmmm, no. \nStart again and answer this riddle to pass this line.");
