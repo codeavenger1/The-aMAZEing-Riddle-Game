@@ -1,3 +1,4 @@
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
@@ -5,6 +6,7 @@ import javax.swing.JFrame;
 public class mazeRiddleMAIN {
 	static JFrame frame;
 	MazeRiddlePANEL panel;
+	
 	static int height = 655;
 	static int width = 1000;
 	BufferedImage test1;
@@ -19,6 +21,7 @@ public class mazeRiddleMAIN {
 		// TODO Auto-generated method stub
 		mazeRiddleMAIN main = new mazeRiddleMAIN();
 		// test1easyMAZE maze = new test1easyMAZE(0, 0 , width, height);
+
 		main.setup();
 	}
 

@@ -1,5 +1,6 @@
 import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;
@@ -16,13 +17,20 @@ import javax.imageio.ImageIO;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListener, MouseListener {
 	Timer timer;
 	Robot robot;
+	int time = 0;
+	int min = 0;
+	Font timeFont;
+	JDialog dialog = new JDialog(mazeRiddleMAIN.frame);
 	boolean test = false;
+	int counter = 0;
 	public static boolean solveMaze = false;
+	public static boolean solveMaze2 = true;
 	public static BufferedImage maze1Img;
 	public static BufferedImage dinoImg;
 	public static BufferedImage LineImg;
@@ -79,6 +87,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public MazeRiddlePANEL() {
 		// TODO Auto-generated constructor stub
 		this.timer = new Timer(1000 / 60, this);
+		this.timeFont = new Font("LUCIDA BRIGHT", Font.PLAIN , 20 );
 		try {
 			robot = new Robot();
 			maze1Img = ImageIO.read(this.getClass().getResourceAsStream("test1easyMaze.png"));
@@ -94,6 +103,14 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		repaint();
+		counter++;
+		
+		if (counter % 60 == 0) {
+			time++;
+		}
+		if (time == 60) {
+		min+=1;
+		}
 	}
 
 	public void paintComponent(Graphics g) {
@@ -120,6 +137,8 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		canMoveTo(dino.x, dino.y + (dino.height / 2)); // left middle dot
 		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // bottom middle dot
 		canMoveTo(dino.x + (dino.width-20), dino.y + (dino.height / 2)); // right middle dot
+		g.setFont(timeFont);
+g.drawString(""+ time, 20, 40);
 
 //		g.setColor(Color.GREEN.darker().darker());
 //		g.fillRect(dino.x + (dino.width / 2), dino.y+10, 2, 2); // top middle dot
@@ -192,6 +211,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public void tellRiddle(int x, int y) {
 		timer.stop();
 
+		
 		if (x > line.x - line.height && x < line.x + line.width && y > line.y && y < line.y + line.height && line.visible) {
 			riddleChooser(1);
 
@@ -235,6 +255,24 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		if (x > line11.x - line11.height && x < line11.x + line11.width && y > line11.y && y < line11.y + line11.height) {
 			riddleChooser(11);
 	}
+		if (solveMaze == true && solveMaze2 == true) {
+			dino.x = 650;
+			dino.y = 555;
+			dialog.setVisible(false);
+			dialog.dispose();
+			System.out.println("solveMaze");
+			solveMaze = false;
+		}
+		if (solveMaze == false && solveMaze2 == false) {
+			dino.x = 715;
+			dino.y = 430;
+			dialog.setVisible(false);
+			dialog.dispose();
+			System.out.println("solveMaze2");
+			solveMaze = true;
+		}
+		
+		
 //		if (x > line12.x - line12.height && x < line12.x + line12.width && y > line12.y && y < line12.y + line12.height) {
 //
 //			String riddle1 = JOptionPane.showInputDialog("riddle");
@@ -423,7 +461,7 @@ public void riddleChooser(int riddleNum){
 	if (riddleNum == 10) {
 		try {
 			ScaryMaze maze = new ScaryMaze();
-			JDialog dialog = new JDialog(mazeRiddleMAIN.frame);
+			
 			dialog.getContentPane().add(maze);
 			dialog.setVisible(true);
 			dialog.setSize(801, 600);
@@ -434,17 +472,20 @@ public void riddleChooser(int riddleNum){
 		JOptionPane.showMessageDialog(null, "Surprise! To get passed this line, you must complete this smaller maze by dragging your mouse on the blue line.\nIf you fall off the path you have to restart ;)\nMake sure you get to the purple in order to win!\nGood luck!\nPRESS ENTER TO CONTINUE ");
 		
 			line10.setVisible(false);
-			dino.x = Line10x;
+			dino.x = Line10x; 
 			dino.y = Line10y;
-			
-			if (solveMaze == true) {
-				dino.x = 650;
-				dino.y = 555;
-			}
-			else if (solveMaze == false) {
-				JOptionPane.showMessageDialog(null, "Since you could not complete the maze, you must answer each riddle instead of taking the short cut when you won.");
-			}
-			
+//			
+//			if (solveMaze == true) {
+//				dino.x = 650;
+//				dino.y = 555;
+//				dialog.setVisible(false);
+//				dialog.dispose();
+//				System.out.println("solveMaze");
+//			}
+//			else if (solveMaze == false) {
+//				JOptionPane.showMessageDialog(null, "Since you could not complete the maze, you must answer each riddle instead of taking the short cut when you won.");
+//			}
+//			
 			
 		}
 	if (riddleNum == 11) {

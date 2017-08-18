@@ -45,15 +45,19 @@ System.out.println(mouseColor);
 		//5. make a variable to hold the background color. 
 	int background = -16777216;
 		//6. if the mouse falls off the path (if it is on the background)
-		if (mouseColor == background) {
-		JOptionPane.showMessageDialog(null, "OH NO! You fell off the path! Back to the beginning...of the WHOLE game :( ");
-		}
+//		if (mouseColor == background) {
+//		JOptionPane.showMessageDialog(null, "OH NO! You fell off the path! Since you could not complete the maze, you must answer each riddle instead of taking the short cut when you won.");
+//		}
 				// call the scare method
 		
 		//10. if the mouse is on the end color
 				if (mouseColor == -5473060) {
 					JOptionPane.showMessageDialog(null, "Great job! You have won!\nSince you won, you are now able to skip to the very last riddle. ");
 					MazeRiddlePANEL.solveMaze = true;
+				}
+				if (mouseColor == background ) {
+					JOptionPane.showMessageDialog(null, "OH NO! You fell off the path! Since you could not complete the maze, you must answer each riddle instead of taking the short cut when you won.");	
+				MazeRiddlePANEL.solveMaze2 = false;
 				}
 				// pop up a message to tell them they won
 	}
