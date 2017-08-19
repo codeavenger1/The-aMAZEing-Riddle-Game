@@ -17,8 +17,10 @@ public class RedLines extends mazeRiddleGameOBJECT {
 		if (visible == true){
 			//g.drawImage(line, x, y, width, height, null);
 			g.setColor(Color.RED);
+		
 	g.fillRect(x, y, width, height);
 		}
+		
 			}
 	void setVisible(boolean visible){
 		this.visible = visible;

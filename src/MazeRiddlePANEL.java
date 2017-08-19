@@ -21,11 +21,19 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListener, MouseListener {
+	final int MENU_STATE = 0;
+	final int GAME_STATE = 1;
+	final int END_STATE = 2;
+	int currentState = MENU_STATE;
+	
 	Timer timer;
 	Robot robot;
 	int time = 0;
 	int min = 0;
 	Font timeFont;
+	Font menuFont;
+	Font menuFont2;
+	Graphics g;
 	JDialog dialog = new JDialog(mazeRiddleMAIN.frame);
 	boolean test = false;
 	int counter = 0;
@@ -34,8 +42,8 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public static BufferedImage maze1Img;
 	public static BufferedImage dinoImg;
 	public static BufferedImage LineImg;
-	public static int MAZESTARTx = 715;//417;
-	public static int MAZESTARTy = 490; //17;
+	public static int MAZESTARTx = 650; //715;//417;
+	public static int MAZESTARTy = 555; //490; //17;
 	public static int Line1x = 406;
 	public static int Line1y = 20;
 	public static int Line2x = 407;
@@ -66,6 +74,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public static int Line14y = 198;
 	public static int Line15x = 650;
 	public static int Line15y = 605;
+	
 
 	MazeRiddleDINO dino = new MazeRiddleDINO(MAZESTARTx, MAZESTARTy, 50, 50);
 	RedLines line = new RedLines(Line1x, Line1y, 8, 55);
@@ -84,10 +93,13 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	RedLines line14 = new RedLines(Line14x, Line14y, 8, 55);
 	RedLines line15 = new RedLines(Line15x, Line15y, 55, 8);
 
+
 	public MazeRiddlePANEL() {
 		// TODO Auto-generated constructor stub
 		this.timer = new Timer(1000 / 60, this);
 		this.timeFont = new Font("LUCIDA BRIGHT", Font.PLAIN , 20 );
+		this.menuFont = new Font("LUCIDA BRIGHT", Font.BOLD, 25);
+		this.menuFont2 = new Font("LUCIDA BRIGHT", Font.BOLD, 20);
 		try {
 			robot = new Robot();
 			maze1Img = ImageIO.read(this.getClass().getResourceAsStream("test1easyMaze.png"));
@@ -101,6 +113,9 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (currentState == MENU_STATE ) {
+			updateMenuState();
+		}
 		// TODO Auto-generated method stub
 		repaint();
 		counter++;
@@ -131,6 +146,18 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		line13.draw(g,LineImg);
 		line14.draw(g,LineImg);
 		line15.draw(g,LineImg);
+
+		if (currentState == MENU_STATE) {
+			drawMenuState(g);
+			g.setColor(Color.WHITE);
+			g.setFont(menuFont);
+			
+			g.drawString("THE A-MAZE-ING RIDDLE GAME", 250, 100);
+			g.setFont(menuFont2);
+			g.drawString("how to play:", 100, 120);
+			
+			
+		}
 		
 		
 		canMoveTo(dino.x + (dino.width / 2), dino.y+10); // top middle dot
@@ -146,7 +173,13 @@ g.drawString(""+ time, 20, 40);
 //		g.fillRect(dino.x + (dino.width / 2), dino.y + (dino.height-10), 2, 2); // bottom middle dot
 //		g.fillRect(dino.x + (dino.width-10), dino.y + (dino.height / 2), 2, 2); // right middle dot
 	}
-
+void drawMenuState(Graphics g){
+	g.setColor(Color.pink);
+	g.fillRect(0, 0, 1000, 655);
+}
+	void updateMenuState(){
+		
+	}
 	
 	void startGame() {
 		timer.start();
@@ -157,7 +190,7 @@ g.drawString(""+ time, 20, 40);
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
@@ -171,6 +204,12 @@ g.drawString(""+ time, 20, 40);
 		} else if (e.getKeyCode() == KeyEvent.VK_UP) {
 			dino.moveUp();
 		}
+		if (e.getKeyCode() == KeyEvent.VK_S) {
+			currentState++;
+			if(currentState > END_STATE){
+			currentState = MENU_STATE;
+		}}
+		
 	}
 
 	public void canMoveTo(int x, int y) {
@@ -203,6 +242,9 @@ g.drawString(""+ time, 20, 40);
 			line11.setVisible(true);
 			line12.setVisible(true);
 			line13.setVisible(true);
+			line14.setVisible(true);
+			line15.setVisible(true);
+		
 		
 		}
 		
@@ -255,6 +297,20 @@ g.drawString(""+ time, 20, 40);
 		if (x > line11.x - line11.height && x < line11.x + line11.width && y > line11.y && y < line11.y + line11.height) {
 			riddleChooser(11);
 	}
+		if (x > line12.x - line12.height && x < line12.x + line12.width && y > line12.y && y < line12.y + line12.height) {
+			riddleChooser(12);
+	}
+		if (x > line13.x - line13.height && x < line13.x + line13.width && y > line13.y && y < line13.y + line13.height) {
+			riddleChooser(13);
+	}
+		if (x > line14.x && x < line14.x + line14.width && y > line14.y && y < line14.y + line14.height && line14.visible) {
+			riddleChooser(14);
+		}
+		
+		if (x > line15.x - line15.height && x < line15.x + line15.width && y > line15.y && y < line15.y + line15.height) {
+			riddleChooser(15);
+	}
+		
 		if (solveMaze == true && solveMaze2 == true) {
 			dino.x = 650;
 			dino.y = 555;
@@ -529,7 +585,60 @@ if (riddleNum == 12) {
 		dino.x = 417;
 		dino.y = 17;
 	}
-	}}	
+	}
+
+if (riddleNum == 15) {
+	String answer = JOptionPane.showInputDialog("Answer this riddle to pass this line: \n A man lives on the 10th floor of an apartment building.\n Every morning he takes the elevator all the way down to the bottom and goes to work.\n In the evening, when he comes back from work, he gets into the elevator, and if there is someone else in it, he goes back to the 10th floor. \n On rainy days he also goes directly to his floor. \n On all other days, he goes to the 7th floor and walks up 3 flights of stairs to his apartment. \n Why?");
+	if (answer.equalsIgnoreCase("he is short")) {
+		JOptionPane.showMessageDialog(null, "Great job!! You have finished the maze!");
+		String name = JOptionPane.showInputDialog("Enter your name:");
+//		dino.x = Line15x;
+//		dino.y = Line15y;
+	}
+	else {
+		JOptionPane.showMessageDialog(null, "Try again. \nStart again and answer this riddle to pass this line.");
+		dino.x = 417;
+		dino.y = 17;
+	}}
+	
+	//int randomm = new Random().nextInt(3);
+//	String[]riddle15 = {"Answer this riddle to pass this line: \n A man lives on the 10th floor of an apartment building.\n Every morning he takes the elevator all the way down to the bottom and goes to work.\n In the evening, when he comes back from work, he gets into the elevator, and if there is someone else in it, he goes back to the 10th floor. \n On rainy days he also goes directly to his floor. \n On all other days, he goes to the 7th floor and walks up 3 flights of stairs to his apartment. \n Why?" };
+//	String[]answer15 = {"he is a midget"};
+//	String ansorr = JOptionPane.showInputDialog(riddle15);
+//	if (ansorr.equals("he is a midget")) {
+//		JOptionPane.showMessageDialog(null, "You are correct!");
+//		line15.setVisible(false);
+//		dino.x = Line15x;
+//		dino.y = Line15y;
+//		//g.setColor(Color.YELLOW);
+//		//System.out.println("its working");
+//		//timer.stop();
+//	}
+//	else if (ansorr.equals("he is short")) {
+//		JOptionPane.showMessageDialog(null, "You are correct!");
+//		line15.setVisible(false);
+//		dino.x = Line15x;
+//		dino.y = Line15y;
+//	}
+//	else if (ansorr.equals("the man is short")) {
+//		JOptionPane.showMessageDialog(null, "You are correct!");
+//		line15.setVisible(false);
+//		dino.x = Line15x;
+//		dino.y = Line15y;
+//	}
+//	else if (ansorr.equals("the man is a midget")) {
+//		JOptionPane.showMessageDialog(null, "You are correct!");
+//		line15.setVisible(false);
+//		dino.x = Line15x;
+//		dino.y = Line15y;
+//	}
+	}
+//	else {
+//		JOptionPane.showMessageDialog(null, "Try again. \nStart again and answer this riddle to pass this line.");
+//		dino.x = 417;
+//		dino.y = 17;
+//	}
+//	}
 
 
 
