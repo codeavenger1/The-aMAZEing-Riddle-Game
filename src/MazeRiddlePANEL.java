@@ -25,10 +25,12 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
+	Font endFont;
 	
 	Timer timer;
 	Robot robot;
 	int time = 0;
+	int highScore = time;
 	int min = 0;
 	Font timeFont;
 	Font menuFont;
@@ -100,6 +102,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		this.timeFont = new Font("LUCIDA BRIGHT", Font.PLAIN , 20 );
 		this.menuFont = new Font("LUCIDA BRIGHT", Font.BOLD, 25);
 		this.menuFont2 = new Font("LUCIDA BRIGHT", Font.BOLD, 20);
+		this.endFont = new Font("LUCIDA BRIGHT", Font.BOLD, 20);
 		try {
 			robot = new Robot();
 			maze1Img = ImageIO.read(this.getClass().getResourceAsStream("test1easyMaze.png"));
@@ -152,11 +155,21 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 			g.setColor(Color.WHITE);
 			g.setFont(menuFont);
 			
-			g.drawString("THE A-MAZE-ING RIDDLE GAME", 250, 100);
+			g.drawString("THE A-MAZE-ING RIDDLE GAME", 300, 100);
 			g.setFont(menuFont2);
-			g.drawString("how to play:", 100, 120);
+			g.drawString("How to play:", 300, 150);
+			g.drawString("Use the arrow keys to move the dino through the maze. Once you cross a red line, ", 50, 180);
+			g.drawString("answer the riddle shown to get through. Make sure you read each riddle thoroughly.", 50, 210);
 			
+		}
+		if (currentState == END_STATE) {
 			
+			drawEndState(g);
+			g.setColor(Color.WHITE);
+			g.setFont(endFont);
+			g.drawString("THE A-MAZE-ING RIDDLE GAME", 300, 100);
+			g.drawString("Congradulations! You beat my game! To play again press 'R' (there may be new riddles). ", 50, 150);
+			g.drawString("", 100, 120);
 		}
 		
 		
@@ -180,6 +193,13 @@ void drawMenuState(Graphics g){
 	void updateMenuState(){
 		
 	}
+	void drawEndState(Graphics g){
+		g.setColor(Color.orange);
+		g.fillRect(0, 0, 1000, 655);
+	}
+		void updateEndState(){
+			
+		}
 	
 	void startGame() {
 		timer.start();
@@ -209,6 +229,11 @@ void drawMenuState(Graphics g){
 			if(currentState > END_STATE){
 			currentState = MENU_STATE;
 		}}
+		if (e.getKeyCode() == KeyEvent.VK_R) {
+			timer.stop();
+			timer.start();
+			currentState = GAME_STATE;
+		}
 		
 	}
 
@@ -252,7 +277,6 @@ void drawMenuState(Graphics g){
 
 	public void tellRiddle(int x, int y) {
 		timer.stop();
-
 		
 		if (x > line.x - line.height && x < line.x + line.width && y > line.y && y < line.y + line.height && line.visible) {
 			riddleChooser(1);
@@ -576,9 +600,9 @@ if (riddleNum == 12) {
 	String ansorr = JOptionPane.showInputDialog(riddle12[randomm]);
 	if (ansorr.equals(answer12[randomm])) {
 		JOptionPane.showMessageDialog(null, "Yeppers!\nStart again and answer this riddle to pass this line.");
-		line11.setVisible(false);
-		dino.x = Line11x;
-		dino.y = Line11y;
+		line12.setVisible(false);
+		dino.x = Line12x;
+		dino.y = Line12y;
 	}
 	else {
 		JOptionPane.showMessageDialog(null, "No! Try again! \nStart again and answer this riddle to pass this line.");
@@ -591,9 +615,17 @@ if (riddleNum == 15) {
 	String answer = JOptionPane.showInputDialog("Answer this riddle to pass this line: \n A man lives on the 10th floor of an apartment building.\n Every morning he takes the elevator all the way down to the bottom and goes to work.\n In the evening, when he comes back from work, he gets into the elevator, and if there is someone else in it, he goes back to the 10th floor. \n On rainy days he also goes directly to his floor. \n On all other days, he goes to the 7th floor and walks up 3 flights of stairs to his apartment. \n Why?");
 	if (answer.equalsIgnoreCase("he is short")) {
 		JOptionPane.showMessageDialog(null, "Great job!! You have finished the maze!");
-		String name = JOptionPane.showInputDialog("Enter your name:");
-//		dino.x = Line15x;
-//		dino.y = Line15y;
+		//String name = JOptionPane.showInputDialog("Enter your name:");
+		line15.setVisible(false);
+		dino.x = 650;
+		dino.y = 555;
+		timer.stop();
+//		if (time<=highScore) {
+//			JOptionPane.showMessageDialog(null, "You have beat the high score! Your time is "+time);
+//		}
+		currentState = END_STATE;
+			
+		
 	}
 	else {
 		JOptionPane.showMessageDialog(null, "Try again. \nStart again and answer this riddle to pass this line.");
