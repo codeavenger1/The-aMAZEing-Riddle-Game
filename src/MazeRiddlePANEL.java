@@ -44,8 +44,8 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public static BufferedImage maze1Img;
 	public static BufferedImage dinoImg;
 	public static BufferedImage LineImg;
-	public static int MAZESTARTx = 650; //715;//417;
-	public static int MAZESTARTy = 555; //490; //17;
+	public static int MAZESTARTx =  650; //650; //715;//417;
+	public static int MAZESTARTy =  555; //555; //490; //17;
 	public static int Line1x = 406;
 	public static int Line1y = 20;
 	public static int Line2x = 407;
@@ -175,6 +175,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		
 		canMoveTo(dino.x + (dino.width / 2), dino.y+10); // top middle dot
 		canMoveTo(dino.x, dino.y + (dino.height / 2)); // left middle dot
+		
 		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // bottom middle dot
 		canMoveTo(dino.x + (dino.width-20), dino.y + (dino.height / 2)); // right middle dot
 		g.setFont(timeFont);
@@ -276,7 +277,9 @@ void drawMenuState(Graphics g){
 	}
 
 	public void tellRiddle(int x, int y) {
+		
 		timer.stop();
+		long startTime = System.currentTimeMillis();
 		
 		if (x > line.x - line.height && x < line.x + line.width && y > line.y && y < line.y + line.height && line.visible) {
 			riddleChooser(1);
@@ -379,6 +382,8 @@ void drawMenuState(Graphics g){
 //			dino.x = 417;
 //			dino.y = 17;
 //		}
+		long endTime = System.currentTimeMillis();
+		time +=(endTime-startTime)/1000;
 		timer.start();
 	
 	}
