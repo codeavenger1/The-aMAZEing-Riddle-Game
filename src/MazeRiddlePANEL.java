@@ -30,7 +30,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	Timer timer;
 	Robot robot;
 	int time = 0;
-	int highScore = 0;
+	int highScore = 1000;
 	int min = 0;
 	Font timeFont;
 	Font menuFont;
@@ -44,8 +44,8 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public static BufferedImage maze1Img;
 	public static BufferedImage dinoImg;
 	public static BufferedImage LineImg;
-	public static int MAZESTARTx =  650; //650; //715;//417;
-	public static int MAZESTARTy =  555; //555; //490; //17;
+	public static int MAZESTARTx =  715; //650; //715;//417;
+	public static int MAZESTARTy =  490; //555; //490; //17;
 	public static int Line1x = 406;
 	public static int Line1y = 20;
 	public static int Line2x = 407;
@@ -122,13 +122,18 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		// TODO Auto-generated method stub
 		repaint();
 		counter++;
-		
-		if (counter % 60 == 0) {
+		if (currentState == GAME_STATE) {
+			if (counter % 60 == 0) {
 			time++;
 		}
 		if (time == 60) {
 		min+=1;
+			}
+//		else if (currentState == END_STATE ) {
+//			timer.stop();
+//		}
 		}
+		
 	}
 
 	public void paintComponent(Graphics g) {
@@ -151,6 +156,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		line15.draw(g,LineImg);
 
 		if (currentState == MENU_STATE) {
+			
 			drawMenuState(g);
 			g.setColor(Color.WHITE);
 			g.setFont(menuFont);
@@ -160,7 +166,9 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 			g.drawString("How to play:", 420, 150);
 			g.drawString("Use the arrow keys to move the dino through the maze. Once you cross a red line, ", 50, 180);
 			g.drawString("answer the shown riddle correctly to continue. Make sure you read each riddle thoroughly.", 50, 210);
-			g.drawString("Press 'S' to start!", 410, 240);
+			g.drawString("Be sure to use 'a(n)' before an object. Example: a banana/an apple", 50, 240);
+			g.drawString("Please answer with all lower case letters.", 50, 270);
+			g.drawString("Press 'S' to start!", 410, 300);
 			g.drawImage(dinoImg, 200, 50, 100, 100, null);
 
 		}
@@ -171,8 +179,13 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 			g.setFont(endFont);
 			g.drawString("THE aMAZEing RIDDLE GAME", 300, 100);
 			g.drawString("Congradulations! You beat my game!", 50, 150);
+			
 			g.drawString("Your time is "+ time + " seconds", 50, 180);
-			g.drawString("To play again press 'R' (there may be new riddles).", 50, 210);
+			if (time<highScore) {
+				highScore = time;
+			}
+			g.drawString("The current high score is " + highScore + " seconds.", 50, 210);
+			g.drawString("To play again press 'R' (there may be new riddles).", 50, 240);
 		}
 		
 		
@@ -182,7 +195,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // bottom middle dot
 		canMoveTo(dino.x + (dino.width-20), dino.y + (dino.height / 2)); // right middle dot
 		g.setFont(timeFont);
-g.drawString(""+ time, 20, 40);
+		g.drawString(""+ time, 20, 40);
 
 //		g.setColor(Color.GREEN.darker().darker());
 //		g.fillRect(dino.x + (dino.width / 2), dino.y+10, 2, 2); // top middle dot
@@ -232,11 +245,27 @@ void drawMenuState(Graphics g){
 			currentState++;
 			if(currentState > END_STATE){
 			currentState = MENU_STATE;
-		}}
+		}
+			
+			}
 		if (e.getKeyCode() == KeyEvent.VK_R) {
-			timer.stop();
-			timer.start();
+			time = 0;
 			currentState = GAME_STATE;
+			line.setVisible(true);
+			line2.setVisible(true);
+			line3.setVisible(true);
+			line4.setVisible(true);
+			line5.setVisible(true);
+			line6.setVisible(true);
+			line7.setVisible(true);
+			line8.setVisible(true);
+			line9.setVisible(true);
+			line10.setVisible(true);
+			line11.setVisible(true);
+			line12.setVisible(true);
+			line13.setVisible(true);
+			line14.setVisible(true);
+			line15.setVisible(true);
 		}
 		
 	}
@@ -515,7 +544,7 @@ public void riddleChooser(int riddleNum){
 	if (riddleNum == 8) {
 		int randomm = new Random().nextInt(3);
 		String[]riddle8 = {"Answer this riddle to pass this line: \nThe more you take, the more you leave behind. What am I?", "Answer this riddle to pass this line: \nWhat company makes billions of dollars selling Windows?" , "Answer this riddle to pass this line: \nMr. Blue lives in the blue house, Mr. Pink lives in the pink house, and Mr. Brown lives in the brown house. Who lives in the white house?" };
-		String[]answer8 = {"footsteps" , "Microsoft" , "stars"};
+		String[]answer8 = {"footsteps" , "microsoft" , "stars"};
 		String ansorr = JOptionPane.showInputDialog(riddle8[randomm]);
 		if (ansorr.equals(answer8[randomm])) {
 			JOptionPane.showMessageDialog(null, "More than half way there!");
@@ -601,13 +630,13 @@ public void riddleChooser(int riddleNum){
 		
 
 if (riddleNum == 12) {
-	JOptionPane.showMessageDialog(null, "Congradulations! This is your 12th riddle. From this point on, there will be longer and harder riddles. Good luck :)");
+	//JOptionPane.showMessageDialog(null, "Congradulations! This is your 12th riddle. From this point on, there will be longer and harder riddles. Good luck :)");
 	int randomm = new Random().nextInt(3);
 	String[]riddle12 = {"Answer this riddle to pass this line: \nWhat common English verb becomes its own past tense by rearranging its letters? List both words and use the word 'and' in the middle of them in your answer. List the words alphabetically." };
 	String[]answer12 = {"ate and eat"};
 	String ansorr = JOptionPane.showInputDialog(riddle12[randomm]);
 	if (ansorr.equals(answer12[randomm])) {
-		JOptionPane.showMessageDialog(null, "Yeppers!\nStart again and answer this riddle to pass this line.");
+		JOptionPane.showMessageDialog(null, "Yeppers!");
 		line12.setVisible(false);
 		dino.x = Line12x;
 		dino.y = Line12y;
@@ -618,10 +647,44 @@ if (riddleNum == 12) {
 		dino.y = 17;
 	}
 	}
+if (riddleNum == 13) {
+	int randomm = new Random().nextInt(3);
+	String[]riddle13 = {"Answer this riddle to pass this line: \nTwo in a corner, 1 in a room, 0 in a house, but 1 in a shelter. What am I?" };
+	String[]answer13 = {"the letter r"};
+	String ansorr = JOptionPane.showInputDialog(riddle13[randomm]);
+	if (ansorr.equals(answer13[randomm])) {
+		JOptionPane.showMessageDialog(null, "Correct :)");
+		line13.setVisible(false);
+		dino.x = Line13x;
+		dino.y = Line13y;
+	}
+	else {
+		JOptionPane.showMessageDialog(null, "Not quite! \nStart again and answer this riddle to pass this line.");
+		dino.x = 417;
+		dino.y = 17;
+	}
+	}
+if (riddleNum == 14) {
+	int randomm = new Random().nextInt(3);
+	String[]riddle14 = {"Answer this riddle to pass this line: \nYou can see me in water, but I never get wet. What am I?" };
+	String[]answer14 = {"a reflection"};
+	String ansorr = JOptionPane.showInputDialog(riddle14[randomm]);
+	if (ansorr.equals(answer14[randomm])) {
+		JOptionPane.showMessageDialog(null, "Awesome job!");
+		line14.setVisible(false);
+		dino.x = Line14x;
+		dino.y = Line14y;
+	}
+	else {
+		JOptionPane.showMessageDialog(null, "Nope :( \nStart again and answer this riddle to pass this line.");
+		dino.x = 417;
+		dino.y = 17;
+	}
+	}
 
 if (riddleNum == 15) {
-	String answer = JOptionPane.showInputDialog("Answer this riddle to pass this line: \n A man lives on the 10th floor of an apartment building.\n Every morning he takes the elevator all the way down to the bottom and goes to work.\n In the evening, when he comes back from work, he gets into the elevator, and if there is someone else in it, he goes back to the 10th floor. \n On rainy days he also goes directly to his floor. \n On all other days, he goes to the 7th floor and walks up 3 flights of stairs to his apartment. \n Why?");
-	if (answer.equalsIgnoreCase("he is short")) {
+	String answer = JOptionPane.showInputDialog("Answer this riddle to pass this line: \n What is the smallest sentence with all letters in the English alphabets?\nAnswer with all lowercase letters and do not end the sentence with a period.");
+	if (answer.equalsIgnoreCase("the quick brown fox jumps over the lazy dog")) {
 		JOptionPane.showMessageDialog(null, "Great job!! You have finished the maze!");
 		//String name = JOptionPane.showInputDialog("Enter your name:");
 		line15.setVisible(false);
@@ -631,13 +694,13 @@ if (riddleNum == 15) {
 		
 		currentState = END_STATE;
 			//if (time<=highScore) {
-			JOptionPane.showMessageDialog(null, "You have beat the high score! Your time is " + time);
+			//JOptionPane.showMessageDialog(null, "You have beat the high score! Your time is " + time);
 		//}
 		
 	}
 
 	else {
-		JOptionPane.showMessageDialog(null, "Try again. \nStart again and answer this riddle to pass this line.");
+		JOptionPane.showMessageDialog(null, "You were so close!! \nStart again and answer this riddle to pass this line.");
 		dino.x = 417;
 		dino.y = 17;
 	}}
