@@ -30,7 +30,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	Timer timer;
 	Robot robot;
 	int time = 0;
-	int highScore = time;
+	int highScore = 0;
 	int min = 0;
 	Font timeFont;
 	Font menuFont;
@@ -155,21 +155,24 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 			g.setColor(Color.WHITE);
 			g.setFont(menuFont);
 			
-			g.drawString("THE A-MAZE-ING RIDDLE GAME", 300, 100);
+			g.drawString("THE aMAZEing RIDDLE GAME", 300, 100);
 			g.setFont(menuFont2);
-			g.drawString("How to play:", 300, 150);
+			g.drawString("How to play:", 420, 150);
 			g.drawString("Use the arrow keys to move the dino through the maze. Once you cross a red line, ", 50, 180);
-			g.drawString("answer the riddle shown to get through. Make sure you read each riddle thoroughly.", 50, 210);
-			
+			g.drawString("answer the shown riddle correctly to continue. Make sure you read each riddle thoroughly.", 50, 210);
+			g.drawString("Press 'S' to start!", 410, 240);
+			g.drawImage(dinoImg, 200, 50, 100, 100, null);
+
 		}
 		if (currentState == END_STATE) {
 			
 			drawEndState(g);
 			g.setColor(Color.WHITE);
 			g.setFont(endFont);
-			g.drawString("THE A-MAZE-ING RIDDLE GAME", 300, 100);
-			g.drawString("Congradulations! You beat my game! To play again press 'R' (there may be new riddles). ", 50, 150);
-			g.drawString("", 100, 120);
+			g.drawString("THE aMAZEing RIDDLE GAME", 300, 100);
+			g.drawString("Congradulations! You beat my game!", 50, 150);
+			g.drawString("Your time is "+ time + " seconds", 50, 180);
+			g.drawString("To play again press 'R' (there may be new riddles).", 50, 210);
 		}
 		
 		
@@ -625,13 +628,14 @@ if (riddleNum == 15) {
 		dino.x = 650;
 		dino.y = 555;
 		timer.stop();
-//		if (time<=highScore) {
-//			JOptionPane.showMessageDialog(null, "You have beat the high score! Your time is "+time);
-//		}
+		
 		currentState = END_STATE;
-			
+			//if (time<=highScore) {
+			JOptionPane.showMessageDialog(null, "You have beat the high score! Your time is " + time);
+		//}
 		
 	}
+
 	else {
 		JOptionPane.showMessageDialog(null, "Try again. \nStart again and answer this riddle to pass this line.");
 		dino.x = 417;
