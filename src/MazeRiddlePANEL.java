@@ -44,8 +44,8 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 	public static BufferedImage maze1Img;
 	public static BufferedImage dinoImg;
 	public static BufferedImage LineImg;
-	public static int MAZESTARTx =  715; //650; //715;//417;
-	public static int MAZESTARTy =  490; //555; //490; //17;
+	public static int MAZESTARTx =  300; //650; //715;//417;
+	public static int MAZESTARTy =  410; //555; //490; //17;
 	public static int Line1x = 406;
 	public static int Line1y = 20;
 	public static int Line2x = 407;
@@ -195,7 +195,7 @@ public class MazeRiddlePANEL extends JPanel implements ActionListener, KeyListen
 		canMoveTo(dino.x + (dino.width / 2), dino.y + (dino.height-10)); // bottom middle dot
 		canMoveTo(dino.x + (dino.width-20), dino.y + (dino.height / 2)); // right middle dot
 		g.setFont(timeFont);
-		g.drawString(""+ time, 20, 40);
+		g.drawString(""+ time, 5, 25);
 
 //		g.setColor(Color.GREEN.darker().darker());
 //		g.fillRect(dino.x + (dino.width / 2), dino.y+10, 2, 2); // top middle dot
@@ -631,11 +631,12 @@ public void riddleChooser(int riddleNum){
 
 if (riddleNum == 12) {
 	//JOptionPane.showMessageDialog(null, "Congradulations! This is your 12th riddle. From this point on, there will be longer and harder riddles. Good luck :)");
-	int randomm = new Random().nextInt(3);
-	String[]riddle12 = {"Answer this riddle to pass this line: \nWhat common English verb becomes its own past tense by rearranging its letters? List both words and use the word 'and' in the middle of them in your answer. List the words alphabetically." };
-	String[]answer12 = {"ate and eat"};
-	String ansorr = JOptionPane.showInputDialog(riddle12[randomm]);
-	if (ansorr.equals(answer12[randomm])) {
+	int randomm = 0;
+	//String[]riddle12 = {
+	String answer = JOptionPane.showInputDialog("Answer this riddle to pass this line: \nWhat common English verb becomes its own past tense by rearranging its letters? List both words and use the word 'and' in the middle of them in your answer. List the words alphabetically." );
+	//String[]answer12 = {"ate and eat"};
+	//String ansorr = JOptionPane.showInputDialog(riddle12[randomm]);
+	if (answer.equals("ate and eat")) {
 		JOptionPane.showMessageDialog(null, "Yeppers!");
 		line12.setVisible(false);
 		dino.x = Line12x;
@@ -648,7 +649,7 @@ if (riddleNum == 12) {
 	}
 	}
 if (riddleNum == 13) {
-	int randomm = new Random().nextInt(3);
+	int randomm = 0;
 	String[]riddle13 = {"Answer this riddle to pass this line: \nTwo in a corner, 1 in a room, 0 in a house, but 1 in a shelter. What am I?" };
 	String[]answer13 = {"the letter r"};
 	String ansorr = JOptionPane.showInputDialog(riddle13[randomm]);
@@ -656,7 +657,7 @@ if (riddleNum == 13) {
 		JOptionPane.showMessageDialog(null, "Correct :)");
 		line13.setVisible(false);
 		dino.x = Line13x;
-		dino.y = Line13y;
+		dino.y = Line13y -10;
 	}
 	else {
 		JOptionPane.showMessageDialog(null, "Not quite! \nStart again and answer this riddle to pass this line.");
@@ -665,7 +666,7 @@ if (riddleNum == 13) {
 	}
 	}
 if (riddleNum == 14) {
-	int randomm = new Random().nextInt(3);
+	int randomm = 0;
 	String[]riddle14 = {"Answer this riddle to pass this line: \nYou can see me in water, but I never get wet. What am I?" };
 	String[]answer14 = {"a reflection"};
 	String ansorr = JOptionPane.showInputDialog(riddle14[randomm]);
